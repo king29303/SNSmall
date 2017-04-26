@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Model2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+      <resource-ref>
+  	<description>db연동</description>
+  	<res-ref-name>jdbc/mysqlDB</res-ref-name>
+  	<res-type>javax.sql.DataSource</res-type>
+  	<res-auth>Container</res-auth>
+  </resource-ref>
+  
+  <servlet>
+  	<servlet-name>CartFrontController</servlet-name>
+  	<servlet-class>web.cart.action.CartFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CartFrontController</servlet-name>
+  	<url-pattern>*.ca</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ClientFrontController</servlet-name>
+  	<servlet-class>web.client.action.ClientFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ClientFrontController</servlet-name>
+  	<url-pattern>*.cl</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ContactFrontController</servlet-name>
+  	<servlet-class>web.contact.action.ContactFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ContactFrontController</servlet-name>
+  	<url-pattern>*.co</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>PaymentFrontController</servlet-name>
+  	<servlet-class>web.payment.action.PaymentFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PaymentFrontController</servlet-name>
+  	<url-pattern>*.pa</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ProductFrontController</servlet-name>
+  	<servlet-class>web.product.action.ProductFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductFrontController</servlet-name>
+  	<url-pattern>*.pr</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>SnsFrontController</servlet-name>
+  	<servlet-class>web.sns.action.SnsFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SnsFrontController</servlet-name>
+  	<url-pattern>*.sn</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>VendorFrontController</servlet-name>
+  	<servlet-class>web.vendor.action.VendorFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>VendorFrontController</servlet-name>
+  	<url-pattern>*.ve</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ZzimFrontController</servlet-name>
+  	<servlet-class>web.zzim.action.ZzimFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ZzimFrontController</servlet-name>
+  	<url-pattern>*.zz</url-pattern>
+  </servlet-mapping>
+  
+
+  
+</web-app>
+

@@ -1,0 +1,45 @@
+
+@media (min-width: 1200px)
+.content {
+    width: 1170px;
+}
+@media (min-width: 992px)
+.content {
+    width: 970px;
+}
+@media (min-width: 768px)
+.content{
+    width: 750px;
+}
+.content {
+	padding-top: 70px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.more_content {
+    padding-top: 145px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+.portfolio-item {
+    margin-bottom: 25px;
+}
+.business-header {
+    height: 400px;
+    background: url('http://placehold.it/1920x400') center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+/* Customize the text color and shadow color and to optimize text legibility. */
+
+.tagline {
+    text-shadow: 0 0 10px #000;
+    color: #fff;
+}
+
+.img-center {
+    margin: 0 auto;
+}
