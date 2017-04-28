@@ -12,7 +12,14 @@ public class VendorBean {
 	private String person_name;
 	private int vendor_profit;
 	private Date date;
+	private String type;
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getVendor_id() {
 		return vendor_id;
 	}

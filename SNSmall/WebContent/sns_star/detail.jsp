@@ -52,7 +52,10 @@ function showSlides(n) {
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>
-<%SnsBean sb= (SnsBean)request.getAttribute("sb");%>
+<%SnsBean sb= (SnsBean)request.getAttribute("sb");
+String realfilePath = request.getRealPath("/vendor_img");
+System.out.println(realfilePath);
+%>
 <!-- Page Content -->
 <div class="container">
 	<div class="content">
