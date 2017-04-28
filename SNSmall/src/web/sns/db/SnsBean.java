@@ -10,6 +10,7 @@ public class SnsBean {
 	private String profile_img;
 	private String detail_img;
 	private String content;
+	private String category;	
 	private int sns_profit;
 	private int sell;
 	private Date date;
@@ -67,6 +68,12 @@ public class SnsBean {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 }

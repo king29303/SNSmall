@@ -14,7 +14,21 @@ public class CartBean {
 	private int amount;
 	private int price;
 	private Date date;
+	private String vendor_id;
+	private int product_num;
 	
+	public int getProduct_num() {
+		return product_num;
+	}
+	public void setProduct_num(int product_num) {
+		this.product_num = product_num;
+	}
+	public String getVendor_id() {
+		return vendor_id;
+	}
+	public void setVendor_id(String vendor_id) {
+		this.vendor_id = vendor_id;
+	}
 	public String getSns_id() {
 		return sns_id;
 	}

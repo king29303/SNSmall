@@ -13,6 +13,7 @@ public class ProductBean {
 	private String option1;
 	private String option2;
 	private String option3;
+	private String content;
 	private int price;
 	private int amount;
 	private int count;
@@ -71,6 +72,12 @@ public class ProductBean {
 	}
 	public void setOption3(String option3) {
 		this.option3 = option3;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public int getPrice() {
 		return price;

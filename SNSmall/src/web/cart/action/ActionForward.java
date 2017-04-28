@@ -2,8 +2,8 @@ package web.cart.action;
 
 public class ActionForward{
 
-	private String path;
-	private boolean isRedirect;
+	private String path=null;
+	private boolean isRedirect=false;
 	
 	public String getPath() {
 		return path;

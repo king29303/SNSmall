@@ -14,6 +14,14 @@
 	<link href="./himu/css/header.css" rel="stylesheet">
 	<link href="./himu/css/inner.css" rel="stylesheet">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".btn-success").click(function(){
+        $("#writing").toggle();
+    });
+});
+</script>
 </head>
 <body>
 	<!-- <header id="navigation"> 
@@ -112,10 +120,12 @@
 
         </div>
         <div class="well">
-
                     <div class="text-right">
+                    	<div id="writing" style="margin-bottom: 14px; display: none;">
+                    	 <textarea cols="150" rows="3"></textarea></div>
                         <a class="btn btn-success">Leave a Review</a>
                     </div>
+                    
 
                     <hr>
 

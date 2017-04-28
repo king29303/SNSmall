@@ -3,6 +3,7 @@ package web.payment.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -10,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import web.client.db.ClientBean;
+import web.product.db.ProductBean;
 
 public class PaymentDAO {
 
@@ -41,12 +43,13 @@ Connection con = null;
 				max = rs.getInt(1);
 			}
 			
-			sql = "insert into payment(order_num, product_num, sns_id, vendor_id, client_id, amount, message, date, num) values(?,?,?,?,?,?,?,now(),?); ";
+			sql = "insert into payment(order_num, product_num, sns_id, vendor_id, client_id, amount, message, date, num, option1, option2, option3) "
+					+ "values(?,?,?,?,?,?,?,now(),?,?,?,?); ";
 			pstmt = con.prepareStatement(sql);
 			for(int i=0; i<list_pb.size(); i++){
 				pb = (PaymentBean)list_pb.get(i);
 
-				pstmt.setString(1, pb.getNum());
+				pstmt.setString(1, pb.getOrder_num());
 				pstmt.setInt(2, pb.getProduct_num());
 				pstmt.setString(3, pb.getSns_id());
 				pstmt.setString(4, pb.getVendor_id());
@@ -54,6 +57,9 @@ Connection con = null;
 				pstmt.setInt(6, pb.getAmount());
 				pstmt.setString(7, pb.getMessage());
 				pstmt.setInt(8, max+i+1);
+				pstmt.setString(9, pb.getOption1());
+				pstmt.setString(10, pb.getOption2());
+				pstmt.setString(11, pb.getOption3());
 				
 				pstmt.executeUpdate();
 
@@ -84,12 +90,12 @@ Connection con = null;
 	}
 	
 	//sns profit 변경
-	public void addSnsProfit(int price, String sns_id){
+	public void addSnsPay(int price, String sns_id){
 		PaymentBean pb = null;
 		try{
 			con = getConnection();
 			int profit = (int)(price*0.01);
-			sql = "update sns set sns_profit=sns_profit+? where sns_id=? ";
+			sql = "update sns set sns_profit=sns_profit+?, sell=sell+1 where sns_id=? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, profit);
 			pstmt.setString(2, sns_id);
@@ -101,7 +107,7 @@ Connection con = null;
 		if(con != null){try {con.close();}catch(Exception ex) {}}}		
 	}
 	
-	//sns profit 변경
+	// profit 변경
 		public void addVendorProfit(int price, String vendor_id){
 			PaymentBean pb = null;
 			try{
@@ -120,25 +126,55 @@ Connection con = null;
 		}
 	
 	//product amount변경
-		public void subAmount(List<PaymentBean> list_pb){
+		public void subAmount(int amount, int product_num){
 			PaymentBean pb = null;
 			try{
 				con = getConnection();
 				sql = "update product set amount=amount-?, count=count+1 where product_num=? ";
 				pstmt = con.prepareStatement(sql);
-				
-				for(int i=0; i<list_pb.size(); i++){
-					pb = list_pb.get(i);
-					pstmt.setInt(1, pb.getAmount());
-					pstmt.setInt(2, pb.getProduct_num());
+					pstmt.setInt(1, amount);
+					pstmt.setInt(2, product_num);
 					pstmt.executeUpdate();
-				}
-				
-				
 			} catch (Exception e) {e.printStackTrace();}
 			finally {if(rs != null){try {rs.close();} catch (Exception ex) {}}
 			if(pstmt != null){try {pstmt.close();}catch(Exception ex){}}
 			if(con != null){try {con.close();}catch(Exception ex) {}}}			
+		}
+		
+		// getPaymentBean
+		public List<PaymentBean> getPayment(String order_num) {
+			List<PaymentBean> list = new ArrayList<>();
+			PaymentBean pb = null;
+			try{
+				con = getConnection();
+				sql = "select * from payment where order_num = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, order_num);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					pb = new PaymentBean();
+					pb.setAmount(rs.getInt("amount"));
+					pb.setDate(rs.getDate("date"));
+					pb.setMessage(rs.getString("message"));
+					pb.setProduct_num(rs.getInt("product_num"));
+					pb.setOption1(rs.getString("option1"));
+					pb.setOption2(rs.getString("option2"));
+					pb.setOption3(rs.getString("option3"));
+					pb.setOrder_num(rs.getString("order_num"));
+					pb.setSns_id(rs.getString("sns_id"));
+					pb.setVendor_id(rs.getString("vendor_id"));
+					
+					list.add(pb);
+				}
+				
+			} catch (Exception e) {e.printStackTrace();}
+			finally {if(rs != null){try {rs.close();} catch (Exception ex) {}}
+			if(pstmt != null){try {pstmt.close();}catch(Exception ex){}}
+			if(con != null){try {con.close();}catch(Exception ex) {}}}
+			
+			
+			return list;
 		}
 	
 	

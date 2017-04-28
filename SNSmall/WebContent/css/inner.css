@@ -1,4 +1,4 @@
-
+/* basic frame css  */
 @media (min-width: 1200px)
 .content {
     width: 1170px;
@@ -42,4 +42,52 @@
 
 .img-center {
     margin: 0 auto;
+}
+
+.clear{
+	clear: both;
+}
+
+/* SnsDetail */
+#img_wrap{
+	position: relative;
+}
+.prev{
+    top: 65px;
+    position: absolute;
+    left: 0px;	
+}
+.next{
+    top: 65px;
+    position: absolute;
+    right: 0px;	
+}
+#writing{
+	margin-bottom: 14px; 
+	display: none;
+}
+
+#img_list{
+	width: 98%;
+    margin: auto;
+}
+#sns_imgs {
+    display: block;
+    max-width: 250px;
+    max-height: 200px;
+    min-width: 250px;
+    min-height: 200px;
+    width: 250px;
+    height: 200px;
+}
+/* pay */
+#buyer, #product, #pay{
+    width: 900px;
+    margin: auto;
+}
+#policy{
+    margin-top: 55px;
+}
+#policy1{
+    border: 1px solid;
 }

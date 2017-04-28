@@ -7,12 +7,12 @@
 	<meta name="keywords" content="Creative, Onepage, Parallax, HTML5, Bootstrap, Popular, custom, personal, portfolio" /> 
 	<meta name="author" content=""> 
 	<title>HIMU - OnePage HTML Parallax template</title> 
-	<link href="./css/bootstrap.min.css" rel="stylesheet">
-	<link href="./css/prettyPhoto.css" rel="stylesheet"> 
-	<link href="./css/font-awesome.min.css" rel="stylesheet"> 
-	<link href="./css/animate.css" rel="stylesheet"> 
-	<link href="./css/main.css" rel="stylesheet">
-	<link href="./css/responsive.css" rel="stylesheet"> 
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/prettyPhoto.css" rel="stylesheet"> 
+	<link href="css/font-awesome.min.css" rel="stylesheet"> 
+	<link href="css/animate.css" rel="stylesheet"> 
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet"> 
 	<!--[if lt IE 9]> <script src="js/html5shiv.js"></script> 
 	<script src="js/respond.min.js"></script> <![endif]--> 
 	<link rel="shortcut icon" href="images/ico/favicon.png"> 
@@ -60,7 +60,7 @@
 		</div>/navbar 
 	</header> /#navigation 
  -->	
-<jsp:include page="../inc/header.jsp"/>
+<jsp:include page="./inc/header.jsp"/>
 	<section id="home">
 		<div class="home-pattern"></div>
 		<div id="main-carousel" class="carousel slide" data-ride="carousel"> 

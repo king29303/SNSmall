@@ -6,20 +6,18 @@ public class PaymentBean {
 
 	
 	private int product_num;
+	private String order_num;
 	private String sns_id;
 	private String vendor_id;
 	private String client_id;
 	private int amount;
 	private String message;
 	private Date date;
+	private String option1;
+	private String option2;
+	private String option3;
 	
-	public String getNum() {
-		return num;
-	}
-	public void setNum(String num) {
-		this.num = num;
-	}
-	private String num;
+
 	public int getProduct_num() {
 		return product_num;
 	}
@@ -62,6 +60,30 @@ public class PaymentBean {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getOption1() {
+		return option1;
+	}
+	public void setOption1(String option1) {
+		this.option1 = option1;
+	}
+	public String getOption2() {
+		return option2;
+	}
+	public void setOption2(String option2) {
+		this.option2 = option2;
+	}
+	public String getOption3() {
+		return option3;
+	}
+	public void setOption3(String option3) {
+		this.option3 = option3;
+	}
+	public String getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(String order_num) {
+		this.order_num = order_num;
 	}
 	
 }
