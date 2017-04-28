@@ -14,6 +14,7 @@ public class SnsBean {
 	private int sns_profit;
 	private int sell;
 	private Date date;
+	private String type;
 	
 	public String getSns_id() {
 		return sns_id;
@@ -74,6 +75,12 @@ public class SnsBean {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }

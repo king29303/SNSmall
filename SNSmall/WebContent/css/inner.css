@@ -80,6 +80,11 @@
     width: 250px;
     height: 200px;
 }
+
+/* sns list */
+.img-circle {
+    max-width: 200px;
+}
 /* pay */
 #buyer, #product, #pay{
     width: 900px;

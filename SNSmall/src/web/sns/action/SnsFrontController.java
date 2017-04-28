@@ -33,6 +33,44 @@ public class SnsFrontController extends HttpServlet{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}else if(command.equals("/sns_join.sn")){
+			forward= new ActionForward();
+	 		forward.setPath("./member/sns/sns_join.jsp");
+	 		forward.setRedirect(false);
+	 		
+		}else if(command.equals("/IdCheckAction.sn")){
+			action = new IdCheckAction();
+	 		try{
+	 			forward=action.execute(request, response);
+	 		}catch(Exception e){
+	 			e.printStackTrace();
+	 		}
+	 		
+		}else if(command.equals("/SnsJoinAction.sn")){
+			action = new SnsJoinAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/common_join.sn")){
+			forward= new ActionForward();
+	 		forward.setPath("./SNSmall/member/common_join.jsp");
+	 		forward.setRedirect(false);
+	 		
+		}else if(command.equals("/SnsInfo.sn")){
+			action = new Snsinfo();
+	 		try{
+	 			forward=action.execute(request, response);
+	 		}catch(Exception e){
+	 			e.printStackTrace();
+	 		}
+	 		
+		}else if(command.equals("/passConfirm.sn")){
+			forward= new ActionForward();
+	 		forward.setPath("./SNSmall/member/sns/passConfirm.jsp");
+	 		forward.setRedirect(false);
 		}
 
 		if(forward!=null){

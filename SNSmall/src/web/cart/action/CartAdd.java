@@ -14,7 +14,7 @@ public class CartAdd implements Action{
 		// TODO Auto-generated method stub
 		System.out.println("장바구니 추가 액션");
 
-		request.setCharacterEncoding("utf-8");	//한글처리
+		//request.setCharacterEncoding("utf-8");	//한글처리
 		
 		HttpSession session = request.getSession(); 
 		String id = (String)session.getAttribute("id"); //세션에서 id 값 가져오기
@@ -35,7 +35,7 @@ public class CartAdd implements Action{
 		System.out.println("op2 : "+request.getParameter("option2"));
 		System.out.println("op3 : "+request.getParameter("option3"));
 		System.out.println("price : "+request.getParameter("price"));
-		System.out.println("amount : "+request.getParameter("amount"));
+		System.out.println("amount : "+request.getAttribute("amount"));
 		
 		//Basket.bean에값 저장
 		CartBean cb = new CartBean();

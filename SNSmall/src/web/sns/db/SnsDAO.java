@@ -28,7 +28,7 @@ public class SnsDAO {
 	String sql = "";
 	ResultSet rs = null;
 
-	// getSns()
+	// sns id로 SnsBean 리턴
 	public SnsBean getSnsDetail(String sns_id) {
 		SnsBean sb = null;
 		try {
@@ -41,7 +41,7 @@ public class SnsDAO {
 				sb = new SnsBean();
 				sb.setContent(rs.getString("content"));
 				sb.setDate(rs.getDate("date"));
-				// sb.setDetail_img(rs.getString("deatil_img"));
+				sb.setDetail_img(rs.getString("detail_img"));
 				sb.setName(rs.getString("name"));
 				sb.setProfile_img(rs.getString("profile_img"));
 				sb.setSell(rs.getInt("sell"));
@@ -73,7 +73,7 @@ public class SnsDAO {
 		return sb;
 	}
 
-	// sns star 개수
+	// sns star 개수 리턴
 	public int getListCount() {
 		int num = 0;
 
@@ -113,7 +113,7 @@ public class SnsDAO {
 		return num;
 	}
 
-	// 글목록
+	// sns목록
 	public List<Object> snsList(int start, int pageSize) {
 		List<Object> list = new ArrayList<Object>();
 		SnsBean sb = null;
@@ -162,6 +162,149 @@ public class SnsDAO {
 		}
 		return list;
 
+	}
+
+	// sns_id회원가입
+	public void insertMember_sns(SnsBean sb) {
+
+		try {
+
+			con = getConnection();
+
+			sql = "insert into sns(sns_id,pass,name,content,profile_img,sns_profit,date,type,detail_img,category) values(?,?,?,?,?,?,now(),?,?,?)";
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, sb.getSns_id());
+			pstmt.setString(2, sb.getPass());
+			pstmt.setString(3, sb.getName());
+			pstmt.setString(4, sb.getContent());
+			pstmt.setString(5, sb.getProfile_img());
+			pstmt.setInt(6, 0);
+			pstmt.setString(7, "sns");
+			pstmt.setString(8, sb.getDetail_img());
+			pstmt.setString(9, sb.getCategory());
+
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+
+	}// insertMember_sns(SnsBean sb)
+
+	// sns_id id중복체크
+	public int joinIdCheck(String sns_id) {
+		int check = 0;
+
+		String sql = "";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = getConnection();
+			sql = "select sns_id from sns where sns_id=? union select vendor_id from vendor where vendor_id=?"
+					+ " union select client_id from client where client_id=?;";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sns_id);
+			pstmt.setString(2, sns_id);
+			pstmt.setString(3, sns_id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				check = 1;
+			} else {
+				check = 0;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+
+		return check;
+	}// joinIdCheck(String sns_id)
+
+	// sns정보보기->회원수정가기 전 password check
+	public int passCheck(String id, String pass) {
+
+		int check = -1;
+
+		try {
+
+			con = getConnection();
+			sql = "select pass,type from client where client_id=? union select pass,type from vendor where vendor_id=? union select pass,type from sns where sns_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			pstmt.setString(3, id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				if (pass.equals(rs.getString("pass"))) {
+					check = 1;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+		return check;
 	}
 
 }

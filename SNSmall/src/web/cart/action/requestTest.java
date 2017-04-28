@@ -13,11 +13,12 @@ public class requestTest implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-		String[] client_id = request.getParameterValues("client_id");
-		System.out.println(client_id);
-		for(int i=0;i<client_id.length;i++){
-			System.out.println(client_id[i]);
-		}
+		String client_id2 = request.getParameter("client_id");
+		String product_num = request.getParameter("product_num");
+		String amount = request.getParameter("client_id");
+		System.out.println(client_id2);
+		System.out.println(product_num);
+		System.out.println(amount);
 		return null;
 	}
 

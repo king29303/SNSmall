@@ -21,7 +21,7 @@ public class CartListAction implements Action{
 		List<CartBean> CartList = cdao.getCartList(client_id);
 		request.setAttribute("CartList", CartList);
 		ActionForward forward = new ActionForward();
-		forward.setPath("./mypage/cart_list.jsp");
+		forward.setPath("./shopping_basket/cart_list.jsp");
 		forward.setRedirect(false);
 		System.out.println(forward.getPath());
 		return forward;

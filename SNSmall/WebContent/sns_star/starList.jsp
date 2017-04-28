@@ -17,7 +17,7 @@
 </head>
 <body>
 <%
-String realfilePath = request.getRealPath("/vendor_img");
+String realfilePath = request.getRealPath("/sns_pro_upload");
 String pageNum = (String)request.getAttribute("pageNum");
 int count = (Integer)request.getAttribute("count");
 int pageSize = (Integer)request.getAttribute("pageSize");
@@ -48,7 +48,7 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
             	SnsBean sb = list.get(i);%>
             <div class="col-lg-4 col-sm-6 text-center">
             	<!-- http://placehold.it/200x200 -->
-                <img class="img-circle img-responsive img-center" src="./vendor_img/1.png" alt="">
+                <img class="img-circle img-responsive img-center" src="./sns_pro_upload/<%=sb.getProfile_img() %>" alt="">
                 <h3><a href="SnsDetailAction.sn?sns_id=wndms4142"><%=sb.getName() %></a>
                     <small><%=sb.getCategory() %></small>
                 </h3>
