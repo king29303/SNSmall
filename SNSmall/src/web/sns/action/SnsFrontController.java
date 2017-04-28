@@ -69,7 +69,7 @@ public class SnsFrontController extends HttpServlet{
 	 		
 		}else if(command.equals("/passConfirm.sn")){
 			forward= new ActionForward();
-	 		forward.setPath("./SNSmall/member/sns/passConfirm.jsp");
+	 		forward.setPath("./member/sns/passConfirm.jsp");
 	 		forward.setRedirect(false);
 		}
 

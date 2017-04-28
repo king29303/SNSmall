@@ -1,4 +1,4 @@
-package web.product.action;
+package web.qna.action;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ProductFrontController extends HttpServlet{
+import web.product.action.ProductDetailAction;
+
+public class QnaFrontController extends HttpServlet{
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -17,50 +19,24 @@ public class ProductFrontController extends HttpServlet{
 		ActionForward forward = null;
 		Action action = null;
 		
-		if(command.equals("/ProductDetail.pr")){
-			action = new ProductDetailAction();
+		if(command.equals("/QnaInsertAction.qn")){
+			action = new QnaInsertAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {e.printStackTrace();}
 			
-		}else if(command.equals("/ProductUpdate.pr")){
-			action = new ProductUpdateForm();
+		}else if(command.equals("/QnaList.qn")){
+			action = new QnaList();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {e.printStackTrace();}
 			
-		}else if(command.equals("/ProductUpdateAction.pr")){
-			action = new ProductUpdateAction();
-			try{
+		}else if(command.equals("/QnaPopular.qn")){
+			action = new QnaPopular();
+			try {
 				forward = action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-			}			
-		}else if(command.equals("/ProductInsert.pr")){
-			forward = new ActionForward();
-			forward.setPath("./product/productInsertForm.jsp");
-			forward.setRedirect(false);
-		}else if(command.equals("/ProductInsertAction.pr")){
-			action = new ProductInsertAction();
-			try{
-				forward = action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-			}			
-		}else if(command.equals("/ProductListAction.pr")){
-			action = new ProductListAction();
-			try{
-				forward = action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-			}			
-		}else if(command.equals("/ProductDelete.pr")){
-			action = new ProductDeleteAction();
-			try{
-				forward = action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-			}			
+			} catch (Exception e) {e.printStackTrace();}
+			
 		}
 		
 		if(forward != null){
@@ -72,7 +48,7 @@ public class ProductFrontController extends HttpServlet{
 			}
 		}
 	}
-
+		
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);

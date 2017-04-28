@@ -21,7 +21,7 @@ public class vendorViewAction implements Action{
 		request.setAttribute("vb", vb);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("./Main.ve");
+		forward.setPath("./Main.cl");
 		forward.setRedirect(true);			
 		return forward;
 	}
