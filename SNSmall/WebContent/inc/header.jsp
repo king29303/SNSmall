@@ -1,12 +1,13 @@
+
 <header id="navigation"> 
 		<div class="navbar navbar-inverse navbar-fixed-top" role="banner"> 
 			<div class="container"> 
-				<div style="text-align: right; width:100%">
+				<div style="float: right;;">
 				<span>Join: <a href="sns_join.sn">snsStar</a> 
 				| <a href="clientJoin.cl">client</a> 
 				| <a href="vendorJoin.ve">vendor</a></span>
 				</div>
-				<div style="text-align: right; width:100">
+				<div style="float: right;;">
 				<span>Login: <a href="passConfirm.sn">snsStar</a> 
 				| <a href="login.cl">client</a> 
 				| <a href="vendorView.ve">vendor</a></span>

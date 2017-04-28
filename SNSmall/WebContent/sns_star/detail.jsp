@@ -30,12 +30,14 @@ function view(img){
 	$('#big_img').attr("src", src);
 }
 
+showSlides(0);
 //slide
 function plusSlides(n) {
 	showSlides(n);
 }
 
 function showSlides(n) {
+	alert('test');
 	slides = document.getElementsByClassName("mySlides");
 	if(n==0) length = 4;
 	else if(n==4) length = 8;
@@ -54,7 +56,8 @@ function showSlides(n) {
 <jsp:include page="../inc/header.jsp"/>
 <%SnsBean sb= (SnsBean)request.getAttribute("sb");
 String realfilePath = request.getRealPath("/vendor_img");
-System.out.println(realfilePath);
+System.out.println(sb.getDetail_img());
+String[] detail_img = sb.getDetail_img().split(",");
 %>
 <!-- Page Content -->
 <div class="container">
@@ -99,13 +102,14 @@ System.out.println(realfilePath);
             	<a class="prev" onclick="plusSlides(0)">&#10094;</a>
             </div>
 			<div id="img_list">
+			<%for(int i=0; i<detail_img.length; i++){ %>
             	<div class="col-sm-3 col-xs-6 mySlides" >
              	   <a href="#">
-             	       <img class="img-responsive portfolio-item" id="sns_imgs" src="./vendor_img/1.png" alt="" onclick="view(this)">
+             	       <img class="img-responsive portfolio-item" id="sns_imgs" src="./sns_pro_upload/<%=detail_img[i] %>" alt="" onclick="view(this)">
               	  </a>
           	  	</div>
-
-          		<div class="col-sm-3 col-xs-6 mySlides">
+			<%} %>
+          		<!-- <div class="col-sm-3 col-xs-6 mySlides">
              	   <a href="#">
               	      <img class="img-responsive portfolio-item" id="sns_imgs" src="./vendor_img/4.jpg" alt="" onclick="view(this)">
               	  </a>
@@ -144,7 +148,7 @@ System.out.println(realfilePath);
              	   <a href="#">
                	     <img class="img-responsive portfolio-item" id="sns_imgs" src="./vendor_img/(S)04.jpg" alt="" onclick="view(this)">
                	 </a>
-                </div>
+                </div> -->
             </div>
 				<div class="clear"></div>
                 	<div>

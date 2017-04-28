@@ -1,4 +1,7 @@
 /* basic frame css  */
+a{
+	color: black !important;
+} 
 @media (min-width: 1200px)
 .content {
     width: 1170px;
@@ -85,6 +88,35 @@
 .img-circle {
     max-width: 200px;
 }
+.single-member {
+    background-color: #ececec !important;
+    border: 0px !important;
+    color: #333 !important;
+    margin-bottom: 16px !important
+}
+#our-team{
+	background-color: #ffffff !important;
+}
+#order{
+	float: right;
+}
+#order_option{
+    list-style: none;
+    padding-bottom: 18px;
+}
+
+#order_option li{
+    float: left;
+    padding-right: 19px;
+}
+#paging{
+	text-align: center;
+    margin-top: 17px;
+
+}
+.single-member a{
+	color: #fc7700 !important;
+}
 /* pay */
 #buyer, #product, #pay{
     width: 900px;
@@ -96,3 +128,4 @@
 #policy1{
     border: 1px solid;
 }
+

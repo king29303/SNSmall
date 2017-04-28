@@ -16,7 +16,7 @@ public class StarListAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null) pageNum="1";
 		int currentPage=Integer.parseInt(pageNum);
-		int pageSize = 9;
+		int pageSize = 12;
 		int start = 0;
 		int end = 0;
 		int pageCount = count/pageSize+(count%pageSize==0?0:1);

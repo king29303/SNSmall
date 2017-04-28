@@ -11,9 +11,24 @@
 	<meta name="keywords" content="Creative, Onepage, Parallax, HTML5, Bootstrap, Popular, custom, personal, portfolio" /> 
 	<meta name="author" content=""> 
 	<title>HIMU - OnePage HTML Parallax template</title> 
+	<link href="css/font-awesome.min.css" rel="stylesheet"> 
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/header.css" rel="stylesheet">
 	<link href="./css/inner.css" rel="stylesheet">
+	<link href="./css/main.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.scroll').click(function(){
+			alert('hi');
+			   $('.active').removeClass('active');
+			  $(this).addClass('active'); 
+			});
+	}); 
+
+	
+	</script>
 </head>
 <body>
 <%
@@ -31,30 +46,52 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
 <div class="container">
 	<div class="content">
   		<!-- Introduction Row -->
-        <div class="row">
+        <div class="row" style="margin-top: 43px">
             <div class="col-lg-12">
-                <h1 class="page-header">About Us
+                <h1 class="page-header">SNS STAR LIST
                     <small>It's Nice to Meet You!</small>
                 </h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
             </div>
         </div>
+        <div id="order"><ul id="order_option"><li style="font-weight: bold;color: darkblue;">정렬방법</li><li>가격순</li><li>인기순</li><li>최신순</li></ul></div>
         <!-- Team Members Row -->
         <div class="row">
-            <div class="col-lg-12">
-                <h2 class="page-header">Our Team</h2>
-            </div>
+           <!--  <div class="col-lg-12">
+                <h2 class="page-header">SNS STAR LIST</h2>
+            </div> -->
+            <section id="our-team">
             <% for(int i=0; i<list.size(); i++){
             	SnsBean sb = list.get(i);%>
-            <div class="col-lg-4 col-sm-6 text-center">
+            <%-- <div class="col-lg-4 col-sm-6 text-center">
             	<!-- http://placehold.it/200x200 -->
                 <img class="img-circle img-responsive img-center" src="./sns_pro_upload/<%=sb.getProfile_img() %>" alt="">
                 <h3><a href="SnsDetailAction.sn?sns_id=wndms4142"><%=sb.getName() %></a>
                     <small><%=sb.getCategory() %></small>
                 </h3>
                 <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <%}
+            </div> --%>
+            
+            <div class="col-sm-6 col-md-3">
+								<div class="single-member">
+									<img src="./sns_pro_upload/<%=sb.getProfile_img() %>" alt="team member" />
+									<%-- <h4><a href="SnsDetailAction.sn?sns_id=wndms4142"><%=sb.getName() %></a></h4>
+									<h5><%=sb.getCategory() %></h5> --%>
+									<h3><a href="SnsDetailAction.sn?sns_id=<%=sb.getSns_id()%>"><%=sb.getName() %></a>
+                  					<small><%=sb.getCategory() %></small>
+               						</h3>
+									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod</p>
+									<div class="socials">
+										<a href="#"><i class="fa fa-facebook"></i></a>
+										<a href="#"><i class="fa fa-twitter"></i></a>
+										<a href="#"><i class="fa fa-google-plus"></i></a>
+										<a href="#"><i class="fa fa-dribbble"></i></a>
+										<a href="#"><i class="fa fa-linkedin"></i></a>
+									</div>
+								</div>
+							</div>
+							
+            <%}%></section><div id="paging"> <%
 			if(count!=0){
 				int pageCount = (Integer)request.getAttribute("pageCount");
 				int pageBlock = (Integer)request.getAttribute("pageBlock");
@@ -79,6 +116,7 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
 					<a href="snsList.sn?pageNum=<%=startPage+pageBlock %>">[다음]</a>&nbsp;
 				<%}
 			}//end if count%>
+			</div>
         </div>
         <hr>
         <!-- Footer -->
