@@ -1,0 +1,4 @@
+폴더경로
+
+D:\workspace_jsp2\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\high\vendor_img
+

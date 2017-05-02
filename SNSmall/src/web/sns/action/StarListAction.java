@@ -12,7 +12,11 @@ public class StarListAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SnsDAO sdao = new SnsDAO();
-		int count = sdao.getListCount();
+		String category = request.getParameter("category");
+		if(category == null) category = "all";
+		String order = request.getParameter("order");
+		if(order == null) order = "sell";
+		int count = sdao.getListCount(category);
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null) pageNum="1";
 		int currentPage=Integer.parseInt(pageNum);
@@ -26,9 +30,10 @@ public class StarListAction implements Action{
 		
 		start = (pageSize*(currentPage-1));
 		end = start+pageSize-1;  
+		
 		List<?> list = null ;
 	 	if(count!=0){
-	 		list = sdao.snsList(start, pageSize);
+	 		list = sdao.snsList(start, pageSize, category, order);
 		} 
 	 	
 	 	request.setAttribute("list", list);
@@ -41,6 +46,8 @@ public class StarListAction implements Action{
 	 	request.setAttribute("pageBlock", pageBlock);
 	 	request.setAttribute("startPage", startPage);
 	 	request.setAttribute("endPage", endPage);
+	 	request.setAttribute("category", category);
+	 	request.setAttribute("order", order);
 	 	
 	 	ActionForward forward = new ActionForward();
 	 	forward.setPath("./sns_star/starList.jsp");

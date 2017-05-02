@@ -35,14 +35,24 @@ img {
 ======Header main CSS=====
 ======================*/
 
-#navigation .navbar {
-    background: rgba(255, 255, 255, 0.952941);
-    border-radius: 0;
-    border-bottom: 0;
-    box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 3px;
-    padding-bottom: 8px;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
-
+.dropdown-content a{
+    line-height: 30px;
+    padding: 7px 30% !important;
+	text-align: center;
+}
+.dropdown-content a:hover {
+    background-color: rgba(253, 178, 111, 0.46) !important;
+}
+.dropbtn:hover .dropdown-content{
+    display: block;
+}
 #navigation .navbar-toggle{
   margin-top: 20px;
   background-color: #333;
@@ -80,4 +90,5 @@ img {
 	color: #fff;
 	background-color: #fc7700;
 }
+
 

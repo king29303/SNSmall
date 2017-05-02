@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head> 
@@ -13,6 +15,7 @@
 	<link href="./css/animate.css" rel="stylesheet"> 
 	<link href="./css/main.css" rel="stylesheet">
 	<link href="./css/responsive.css" rel="stylesheet"> 
+	<link href="./css/header.css" rel="stylesheet"> 
 	<!--[if lt IE 9]> <script src="js/html5shiv.js"></script> 
 	<script src="js/respond.min.js"></script> <![endif]--> 
 	<link rel="shortcut icon" href="images/ico/favicon.png"> 

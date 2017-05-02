@@ -35,15 +35,20 @@ public class PayCompleteAction implements Action{
 		String[] option2 = option2_str.split(",");
 		String option3_str = request.getParameter("option3_str");
 		String[] option3 = option3_str.split(",");
-
-		// Payment에 Insert
+		String method = request.getParameter("method");
+		String state="";
+		if(method.equals("card")) state="payDone";
+		else if(method.equals("deposit")) state="waiting";
+		
+		// Payment�뿉 Insert
 		PaymentBean pb = null;
 		ProductBean prob = null;
 		PaymentDAO pdao = new PaymentDAO();
 		ProductDAO prodao = new ProductDAO();
+		int usedPoint = pdao.usingPoint(point, id);
 		List<PaymentBean> list_pb = new ArrayList<>();
 		for (int i = 0; i < amount.length; i++) {
-			prob = prodao.getProduct((Integer.parseInt(product[i])));// 물건 번호
+			prob = prodao.getProduct((Integer.parseInt(product[i])));// 臾쇨굔 踰덊샇
 																		// ProductBean
 			pb = new PaymentBean();
 			pb.setAmount(Integer.parseInt(amount[i]));
@@ -57,16 +62,16 @@ public class PayCompleteAction implements Action{
 			pb.setOption2(option2[i]);
 			pb.setOption3(option3[i]);
 			list_pb.add(pb);
-			// 포인트 변경
+			// �룷�씤�듃 蹂�寃�
 			pdao.subPoint(point, id);
-			// sns star profit변경, sell증가
+			// sns star profit蹂�寃�, sell利앷�
 			pdao.addSnsPay(prob.getPrice(), sns_id[i]);
-			// vendor profit 변경
+			// vendor profit 蹂�寃�
 			pdao.addVendorProfit(prob.getPrice(), vendor_id[i]);
 
 			pdao.subAmount(Integer.parseInt(amount[i]), Integer.parseInt(product[i]));
 		}
-		pdao.insertPay(list_pb);
+		pdao.insertPay(list_pb, usedPoint, state);
 		return null;
 	}
 	

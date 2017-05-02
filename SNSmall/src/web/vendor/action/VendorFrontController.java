@@ -42,9 +42,13 @@ public class VendorFrontController extends HttpServlet{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}else if(command.equals("/vendorJoin2.ve")){
+			forward = new ActionForward();
+			forward.setPath("./member/vendor/vendorJoinForm2.jsp");
+			forward.setRedirect(false);
 		}
 		
-		// 이동
+		// �씠�룞
 		if(forward != null){
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());
@@ -52,7 +56,7 @@ public class VendorFrontController extends HttpServlet{
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}				
-		}// 이동		
+		}// �씠�룞		
 		
 	}// doProcess()
 

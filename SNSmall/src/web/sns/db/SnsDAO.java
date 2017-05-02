@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.Context;
@@ -28,7 +29,7 @@ public class SnsDAO {
 	String sql = "";
 	ResultSet rs = null;
 
-	// sns id로 SnsBean 리턴
+	// sns id濡� SnsBean 由ы꽩
 	public SnsBean getSnsDetail(String sns_id) {
 		SnsBean sb = null;
 		try {
@@ -46,6 +47,7 @@ public class SnsDAO {
 				sb.setProfile_img(rs.getString("profile_img"));
 				sb.setSell(rs.getInt("sell"));
 				sb.setSns_profit(rs.getInt("sns_profit"));
+				sb.setCategory(rs.getString("category"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,15 +75,27 @@ public class SnsDAO {
 		return sb;
 	}
 
-	// sns star 개수 리턴
-	public int getListCount() {
+	// sns star 媛쒖닔 由ы꽩
+	public int getListCount(String category) {
 		int num = 0;
 
 		try {
 			con = getConnection();
-			sql = "select count(sns_id) from sns";
-
-			pstmt = con.prepareStatement(sql);
+			StringBuffer sql = new StringBuffer("select count(sns_id) from sns ");
+			if(category.equals("fashion")){
+				sql.append("where category = 'fashion'");
+			}else if(category.equals("beauty")){
+				sql.append("where category = 'beauty'");
+			}else if(category.equals("baby")){
+				sql.append("where category = 'baby'");
+			}else if(category.equals("daily")){
+				sql.append("where category = 'daily'");
+			}else if(category.equals("gym")){
+				sql.append("where category = 'gym'");
+			}else if(category.equals("etc")){
+				sql.append("where category = 'etc'");
+			}
+			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				num = rs.getInt(1);
@@ -113,14 +127,37 @@ public class SnsDAO {
 		return num;
 	}
 
-	// sns목록
-	public List<Object> snsList(int start, int pageSize) {
+	// sns紐⑸줉
+	public List<Object> snsList(int start, int pageSize, String category, String order) {
 		List<Object> list = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer("select * from sns ");
 		SnsBean sb = null;
-		try {
+				try {
 			con = getConnection();
-			sql = "select * from sns order by sell limit ?,?;";
-			pstmt = con.prepareStatement(sql);
+			if(category.equals("fashion")){
+				sql.append("where category = 'fashion'");
+			}else if(category.equals("beauty")){
+				sql.append("where category = 'beauty'");
+			}else if(category.equals("baby")){
+				sql.append("where category = 'baby'");
+			}else if(category.equals("daily")){
+				sql.append("where category = 'daily'");
+			}else if(category.equals("gym")){
+				sql.append("where category = 'gym'");
+			}else if(category.equals("etc")){
+				sql.append("where category = 'etc'");
+			}
+			
+			if(order.equals("sell")){
+				sql.append(" order by sell desc");
+			}else if(order.equals("date")){
+				sql.append(" order by date desc");
+			}else if(order.equals("sns_profit")){
+				sql.append(" order by sell desc");
+			}
+			
+			sql.append(" limit ?,?;");
+			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
@@ -164,7 +201,7 @@ public class SnsDAO {
 
 	}
 
-	// sns_id회원가입
+	// sns_id�쉶�썝媛��엯
 	public void insertMember_sns(SnsBean sb) {
 
 		try {
@@ -211,7 +248,7 @@ public class SnsDAO {
 
 	}// insertMember_sns(SnsBean sb)
 
-	// sns_id id중복체크
+	// sns_id id以묐났泥댄겕
 	public int joinIdCheck(String sns_id) {
 		int check = 0;
 
@@ -261,7 +298,7 @@ public class SnsDAO {
 		return check;
 	}// joinIdCheck(String sns_id)
 
-	// sns정보보기->회원수정가기 전 password check
+	// sns�젙蹂대낫湲�->�쉶�썝�닔�젙媛�湲� �쟾 password check
 	public int passCheck(String id, String pass) {
 
 		int check = -1;
@@ -306,5 +343,129 @@ public class SnsDAO {
 		}
 		return check;
 	}
+	
+	// sns 스타가 판매한 물품
+	public List<Integer> snsProductList(String sns_id, String order) {
+		List<Integer> list = new ArrayList<Integer>();
+		//HashMap<Integer, Integer> map = new HashMap<>();
+		String sql2;
+
+		ResultSet rs2 = null;
+		//ResultSet rs3 = null;
+		try {
+			con = getConnection();
+			if (order.equals("date")) {
+				sql = "select product_num from payment where sns_id=? group by product_num order by date desc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, sns_id);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					//System.out.println(rs.getInt(1));		
+					list.add(rs.getInt(1));
+				}
+			} else if (order.equals("sell")) {
+				sql2 = "select product_num, count(*) from payment  where sns_id = ? group by product_num order by count(*) desc";
+				pstmt = con.prepareStatement(sql2);
+				pstmt.setString(1, sns_id);
+				rs2 = pstmt.executeQuery();
+				while(rs2.next()){
+					//System.out.println(rs2.getInt("product_num")+", "+rs2.getInt("count(*)"));
+					list.add(rs2.getInt("product_num"));
+					//map.put(rs2.getInt("product_num"), rs2.getInt("count(*)"));
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (rs2 != null) {
+				try {
+					rs2.close();
+				} catch (Exception ex) {
+				}
+			}
+			/*if (rs3 != null) {
+				try {
+					rs3.close();
+				} catch (Exception ex) {
+				}
+			}*/
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+		return list;
+
+	}
+/*		// sns 스타가 판매한 물품
+	public List<SnsBean> snsProductList(String sns_id, String order) {
+		List<SnsBean> list = new ArrayList<SnsBean>();
+		StringBuffer sql = new StringBuffer("select * from payment where sns_id=?");
+		SnsBean sb = null;
+		try {
+			con = getConnection();
+			if (order.equals("date")) {
+				sql.append(" order by date desc");
+			}
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, sns_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				sb = new SnsBean();
+				sb.setContent(rs.getString("content"));
+				sb.setDate(rs.getDate("date"));
+				sb.setDetail_img(rs.getString("detail_img"));
+				sb.setName(rs.getString("name"));
+				sb.setProfile_img(rs.getString("profile_img"));
+				sb.setSell(rs.getInt("sell"));
+				sb.setSns_id(rs.getString("sns_id"));
+				sb.setSns_profit(rs.getInt("sns_profit"));
+				sb.setCategory(rs.getString("category"));
+
+				list.add(sb);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+		return list;
+
+	}
+*/
+
 
 }

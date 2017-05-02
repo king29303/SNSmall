@@ -24,7 +24,14 @@ public class PaymentFrontController extends HttpServlet {
 		} else if (command.equals("/PayCompleteAction.pa")) {
 			action = new PayCompleteAction();
 			try {
-				action.execute(request, response);
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/PayDepositDoneAction.pa")) {
+			action = new PayDepositDoneAction();
+			try {
+				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -36,6 +43,56 @@ public class PaymentFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./pay/payDone.jsp");
 			forward.setRedirect(false);
+		} else if (command.equals("/MyPage.pa")) {
+			forward = new ActionForward();
+			forward.setPath("./mypage/mypage.jsp");
+			forward.setRedirect(false);
+		} else if (command.equals("/PayList.pa")) {
+			forward = new ActionForward();
+			forward.setPath("./mypage/mypay_list.jsp");
+			forward.setRedirect(false);
+		} else if (command.equals("/PayInnerList.pa")) {
+			action = new PayListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/PayInnerList.pa")) {
+			action = new PayListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/PayDetail.pa")) {
+			action = new PayDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/PayCancle.pa")) {
+			action = new PayCancleAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/PayDepositDone.pa")) {
+			action = new PayDepositDoneAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/PayMultipleCancle.pa")) {
+			action = new PayMultipleCancleAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		if (forward != null) {

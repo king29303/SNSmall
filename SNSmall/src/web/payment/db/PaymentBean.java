@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class PaymentBean {
 
-	
+	private int num;
 	private int product_num;
 	private String order_num;
 	private String sns_id;
@@ -16,6 +16,8 @@ public class PaymentBean {
 	private String option1;
 	private String option2;
 	private String option3;
+	private String state;
+	private int usedPoint;
 	
 
 	public int getProduct_num() {
@@ -85,5 +87,24 @@ public class PaymentBean {
 	public void setOrder_num(String order_num) {
 		this.order_num = order_num;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public int getUsedPoint() {
+		return usedPoint;
+	}
+	public void setUsedPoint(int usedPoint) {
+		this.usedPoint = usedPoint;
+	}
+
 	
 }

@@ -12,6 +12,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/inner.css" rel="stylesheet">
+	<link href="css/header.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -42,7 +43,7 @@
 	<jsp:include page="../inc/header.jsp"/>
   <!-- Page Content -->
   <div class="container">
-    <div class="content">
+    <div class="more_content">
     <!-- Image Background Page Header -->
     <!-- Note: The background image is set within the business-casual.css file. -->
     <header class="business-header">

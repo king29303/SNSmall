@@ -84,11 +84,6 @@ price += prob.getPrice();
         </footer>
          <!-- /.container -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-  </div>
+ </div>
 </body>
 </html>

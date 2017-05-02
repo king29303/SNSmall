@@ -61,6 +61,14 @@ public class ProductFrontController extends HttpServlet{
 			}catch(Exception e){
 				e.printStackTrace();
 			}			
+		}else if(command.equals("/ProductList.pr")){
+			forward = new ActionForward();
+			forward.setPath("./product/goodsList2.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/Detail2.pr")){
+			forward = new ActionForward();
+			forward.setPath("./product/detail2.jsp");
+			forward.setRedirect(false);
 		}
 		
 		if(forward != null){

@@ -8,6 +8,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<meta name="description" content="Creative One Page Parallax Template">
+	<meta name="keywords" content="Creative, Onepage, Parallax, HTML5, Bootstrap, Popular, custom, personal, portfolio" /> 
+	<meta name="author" content=""> 
+	<title>HIMU - OnePage HTML Parallax template</title> 
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<link href="./css/header.css" rel="stylesheet">
+	<link href="./css/inner.css" rel="stylesheet">
+	<link href="./css/main.css" rel="stylesheet"> 
 <title>Insert title here</title>
 <!-- 체크박스에 체크가 되어있으면 function에서 합쳐서 합가격 리턴  -->
 
@@ -28,6 +37,20 @@ function myfunction(){
 </script>
 </head>
 <body>
+<jsp:include page="../inc/header.jsp"/>
+<%String id = "test";
+%>
+  <!-- Page Content -->
+  <div class="container">
+    <div class="more_content">
+    <!-- Page Content -->
+        <div class="row">
+        
+            <div class="col-md-3">
+                <p class="lead"><%=id %></p>
+                <jsp:include page="../inc/myinfo_left.jsp"/>
+            </div>
+            <div class="col-md-9">
 <%
 List<CartBean> cblist = new ArrayList<CartBean>();
 %>
@@ -106,7 +129,10 @@ option3 += cb.getOption3()+",";
  <br>
 	<input type="submit" value="결제하기">
  </form>
-
+</div>
+</div>
+</div>
+</div>
 
 
 

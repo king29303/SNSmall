@@ -27,7 +27,11 @@ public class ClientFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./member/client/clientJoinForm.jsp");
 			forward.setRedirect(false);
-		} else if (command.equals("/clientJoinAction.cl")) {
+		}else if (command.equals("/Service.cl")) {
+			forward = new ActionForward();
+			forward.setPath("./service/service.jsp");
+			forward.setRedirect(false);
+		}else if (command.equals("/clientJoinAction.cl")) {
 			action = new clientJoinAction();
 			try {
 				forward = action.execute(request, response);
@@ -60,15 +64,23 @@ public class ClientFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}else if(command.equals("/logOut.cl")){
-			// 패키지 net.member.action 파일 MemberLogout.java
+			// �뙣�궎吏� net.member.action �뙆�씪 MemberLogout.java
 			action = new logOutAction();
-			// forward = execute메서드 호출 -> 주소값 리턴
+			// forward = execute硫붿꽌�뱶 �샇異� -> 二쇱냼媛� 由ы꽩
 			try{
 				forward = action.execute(request, response);	
 			}catch(Exception e){
 				e.printStackTrace();
 			}				
-		}
+		}else if (command.equals("/clientJoin2.cl")) {
+			forward = new ActionForward();
+			forward.setPath("./member/client/clientJoinForm2.jsp");
+			forward.setRedirect(false);
+		} else if (command.equals("/login2.cl")) {
+			forward = new ActionForward();
+			forward.setPath("./member/loginForm2.jsp");
+			forward.setRedirect(false);
+		} 
 		
 		if (forward != null) {
 			if (forward.isRedirect()) {

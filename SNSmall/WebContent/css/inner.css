@@ -1,7 +1,8 @@
-/* basic frame css  */
 a{
 	color: black !important;
 } 
+
+/* basic frame css  */
 @media (min-width: 1200px)
 .content {
     width: 1170px;
@@ -52,6 +53,12 @@ a{
 }
 
 /* SnsDetail */
+#bigimg_active{
+	text-align: center;
+}
+#bigimg_active img{
+    max-width: 500px;
+}
 #img_wrap{
 	position: relative;
 }
@@ -83,19 +90,95 @@ a{
     width: 250px;
     height: 200px;
 }
-
-/* sns list */
-.img-circle {
-    max-width: 200px;
+#tab{
+    background: #F9F9F9;
+    font-size: 0;
+    border-bottom: 2px solid #0073e9;
+    overflow: hidden;
+  	width: 100%;
+  	z-index: 10;
 }
+#tab a{
+    text-align: center;
+    color: inherit;
+    border-collapse: collapse;
+    z-index: 1;
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    width: 25%;
+    box-sizing: border-box;
+    padding: 15px 20px 14px;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+#tab #t_skill.active{
+	border: 2px solid #0073E9;
+    border-bottom-color: #ffffff;
+    margin-bottom: -2px;
+    background: #ffffff;
+    color: #0073E9;
+}
+#tab #t_sell_popular.active{
+	border: 2px solid #0073E9;
+    border-bottom-color: #ffffff;
+    margin-bottom: -2px;
+    background: #ffffff;
+    color: #0073E9;
+}
+#tab #t_sell_latest.active{
+	border: 2px solid #0073E9;
+    border-bottom-color: #ffffff;
+    margin-bottom: -2px;
+    background: #ffffff;
+    color: #0073E9;
+}
+#tab #m_proInfo.active{
+	border: 2px solid #0073E9;
+    border-bottom-color: #ffffff;
+    margin-bottom: -2px;
+    background: #ffffff;
+    color: #0073E9;
+}
+#top.active{
+	background-color: #010101;
+}
+#sell_latest_box{
+	overflow: hidden;
+	margin: 100px 0;
+}
+#sell_popular_box{
+	overflow: hidden;
+	margin: 100px 0;
+}
+#skill{
+	overflow: hidden;
+}
+/* sns list */
 .single-member {
     background-color: #ececec !important;
     border: 0px !important;
     color: #333 !important;
-    margin-bottom: 16px !important
+    margin-bottom: 16px !important;
+    padding: 18px !important;
+    height: 375px !important;
+}
+#profile_img_wrap{
+    min-height: 140px;
+    max-height: 169px;
+}
+.single-member img{
+    min-height: 130px;
+    max-height: 169px;
+}
+#star_list_detail{
+    min-height: 85px;
+    max-height: 85px;
 }
 #our-team{
 	background-color: #ffffff !important;
+	padding: 43px 0;
 }
 #order{
 	float: right;
@@ -117,6 +200,52 @@ a{
 .single-member a{
 	color: #fc7700 !important;
 }
+
+#our-team .socials a .fa-facebook{
+	background: #3B5997 !important;
+}
+#our-team .socials a .fa-twitter {
+    background: #29C5F6 !important;
+}
+#our-team .socials a .fa-google-plus {
+    background: #D13D2F !important;
+}
+#our-team .socials a .fa-dribbble {
+    background: #FF5C93 !important;
+}
+#our-team .socials a .fa-linkedin {
+    background: #006DC0 !important;
+}
+#our-team .socials a .fa-facebook:hover {
+    border-radius: 0px;
+    border: solid 1px !important;
+}
+#our-team .socials a .fa-twitter:hover {
+    border-radius: 0px;
+    border: solid 1px !important;
+}
+#our-team .socials a .fa-google-plus:hover {
+    border-radius: 0px;
+    border: solid 1px !important;
+}
+#our-team .socials a .fa-dribbble:hover {
+    border-radius: 0px;
+    border: solid 1px !important;
+}
+#our-team .socials a .fa-linkedin:hover {
+    border-radius: 0px;
+    border: solid 1px !important;
+}
+
+#our-team .socials a i {
+    opacity: 1 !important;
+    color: #080808 !important;
+    border: 0px !important;
+}
+
+.socials{
+    margin-top: 30px;
+}
 /* pay */
 #buyer, #product, #pay{
     width: 900px;
@@ -127,5 +256,37 @@ a{
 }
 #policy1{
     border: 1px solid;
+}
+
+/* Mypage */
+#show_content {
+	 display: none;  
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 212px;
+    width: 237px;
+    top: 13px;
+   border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+#show_content a{
+    line-height: 30px;
+    padding: 7px 30% !important;
+	text-align: center;
+}
+#show_content a:hover {
+    background-color: rgba(234, 232, 232, 0.61) !important;
+}
+#showbtn:hover #show_content{
+     display: block; 
+    /* display: none; */
+}
+.list-group {
+    position: relative;
+}
+a.list-group-item:hover, a.list-group-item:focus {
+    background-color: #dedede !important;
 }
 

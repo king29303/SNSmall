@@ -1,17 +1,17 @@
 <%@page import="web.sns.db.SnsBean"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 	<meta name="description" content="Creative One Page Parallax Template">
 	<meta name="keywords" content="Creative, Onepage, Parallax, HTML5, Bootstrap, Popular, custom, personal, portfolio" /> 
 	<meta name="author" content=""> 
 	<title>HIMU - OnePage HTML Parallax template</title> 
-	<link href="css/font-awesome.min.css" rel="stylesheet"> 
+	<link href="./css/font-awesome.min.css" rel="stylesheet"> 
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/header.css" rel="stylesheet">
 	<link href="./css/inner.css" rel="stylesheet">
@@ -21,17 +21,18 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('.scroll').click(function(){
-			alert('hi');
-			   $('.active').removeClass('active');
-			  $(this).addClass('active'); 
+			//alert('hi');
+			  //$('.active').removeClass('active');
+			  $(this).addClass('active');  
 			});
 	}); 
-
 	
 	</script>
 </head>
 <body>
 <%
+String category = (String)request.getAttribute("category");
+String order = (String)request.getAttribute("order");
 String realfilePath = request.getRealPath("/sns_pro_upload");
 String pageNum = (String)request.getAttribute("pageNum");
 int count = (Integer)request.getAttribute("count");
@@ -54,9 +55,14 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
             </div>
         </div>
-        <div id="order"><ul id="order_option"><li style="font-weight: bold;color: darkblue;">Á¤·Ä¹æ¹ı</li><li>°¡°İ¼ø</li><li>ÀÎ±â¼ø</li><li>ÃÖ½Å¼ø</li></ul></div>
+      
+
         <!-- Team Members Row -->
         <div class="row">
+          <div id="order"><ul id="order_option"><li style="font-weight: bold;color: darkblue;">ì •ë ¬ë°©ë²•</li>
+          <li><a href="snsList.sn?category=<%=category %>&order=date">ìµœì‹ ìˆœ</a></li>
+          <li><a href="snsList.sn?category=<%=category %>&order=sell">íŒë§¤ëŸ‰ìˆœ</a></li>
+          <li><a href="snsList.sn?category=<%=category %>&order=sns_profit">íŒë§¤ì•¡ìˆœ</a></li></ul></div>
            <!--  <div class="col-lg-12">
                 <h2 class="page-header">SNS STAR LIST</h2>
             </div> -->
@@ -74,13 +80,17 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
             
             <div class="col-sm-6 col-md-3">
 								<div class="single-member">
+									<div id="profile_img_wrap">
 									<img src="./sns_pro_upload/<%=sb.getProfile_img() %>" alt="team member" />
+									</div>
 									<%-- <h4><a href="SnsDetailAction.sn?sns_id=wndms4142"><%=sb.getName() %></a></h4>
 									<h5><%=sb.getCategory() %></h5> --%>
+									<div id="star_list_detail">
 									<h3><a href="SnsDetailAction.sn?sns_id=<%=sb.getSns_id()%>"><%=sb.getName() %></a>
                   					<small><%=sb.getCategory() %></small>
                						</h3>
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod</p>
+									<p><%=sb.getContent() %></p>
+									</div>
 									<div class="socials">
 										<a href="#"><i class="fa fa-facebook"></i></a>
 										<a href="#"><i class="fa fa-twitter"></i></a>
@@ -91,7 +101,9 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
 								</div>
 							</div>
 							
-            <%}%></section><div id="paging"> <%
+            <%}%></section>
+            <div class="clear"></div>
+  <%--           <div id="paging"> <%
 			if(count!=0){
 				int pageCount = (Integer)request.getAttribute("pageCount");
 				int pageBlock = (Integer)request.getAttribute("pageBlock");
@@ -99,24 +111,77 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
 				int endPage = (Integer)request.getAttribute("endPage");
 				if(endPage > pageCount){endPage=pageCount;}
 				if(currentPage<=10){ %>
-					[ÀÌÀü]
+					[ì´ì „]
 				<%}else{ %>
-					<a href="snsList.sn?pageNum=<%=startPage-pageBlock %>">[ÀÌÀü]</a>&nbsp;
+					<a href="snsList.sn?category=<%=category %>&pageNum=<%=startPage-pageBlock %>">[ì´ì „]</a>&nbsp;
 				<%}
 				for(int i=startPage; i<=endPage; i++){
 					if(i==currentPage){%>
 						[<%=i %>]
 					<%}else{%>
-						<a href="snsList.sn?pageNum=<%=i %>">[<%=i %>]</a>&nbsp;
+						<a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=i %>">[<%=i %>]</a>&nbsp;
 					<%}
 				}%>
-				<%if(endPage<pageCount){ %>
-					[´ÙÀ½]
+				<%if(endPage>=pageCount){ %>
+					[ë‹¤ìŒ]
 				<%}else{ %>
-					<a href="snsList.sn?pageNum=<%=startPage+pageBlock %>">[´ÙÀ½]</a>&nbsp;
+					<a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage+pageBlock %>">[ë‹¤ìŒ]</a>&nbsp;
 				<%}
 			}//end if count%>
-			</div>
+			</div> --%>
+			       <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                 <%
+			if(count!=0){
+				int pageCount = (Integer)request.getAttribute("pageCount");
+				int pageBlock = (Integer)request.getAttribute("pageBlock");
+				int startPage = (Integer)request.getAttribute("startPage");
+				int endPage = (Integer)request.getAttribute("endPage");
+				if(endPage > pageCount){endPage=pageCount;}
+				if(currentPage<=10){ %>
+                    <li>
+                        <a>&laquo;</a>
+                    </li>
+                 <%}else{ %>
+                 	<li>
+                        <a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage-pageBlock %>">&laquo;</a>
+                    </li>
+                 <%}
+				for(int i=startPage; i<=endPage; i++){
+					if(i==currentPage){%>
+                    <li class="active">
+                        <a href="#"><%=i %></a>
+                    </li>
+                    <%}else{ %>
+                    <li>
+                        <a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=i %>"><%=i %></a>
+                    </li>
+                    <%}} %>
+                    <!-- <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li> -->
+                    <%if(endPage>=pageCount){ %>
+                    <li>
+                        <a>&raquo;</a>
+                    </li>
+                    <%}else{ %>
+                    <li>
+                        <a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage+pageBlock %>">&raquo;</a>
+                    </li>
+                    <%}} %>
+                </ul>
+            </div>
+        </div>
         </div>
         <hr>
         <!-- Footer -->

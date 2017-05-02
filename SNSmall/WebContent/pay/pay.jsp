@@ -17,6 +17,7 @@
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/main.css" rel="stylesheet">
 	<link href="./css/inner.css" rel="stylesheet">
+	<link href="./css/header.css" rel="stylesheet">
 <style>
 
 #buyer, #product, #pay{
@@ -40,6 +41,7 @@ String option1_str = request.getParameter("option1");
 String option2_str = request.getParameter("option2");
 String option3_str = request.getParameter("option3");
 String snsId_str = "wndms4142,wndms5555";
+//request.setAttribute("id", id);
 ClientBean cb = new ClientBean();
 ClientDAO cdao = new ClientDAO();
 cb = cdao.getMember(id);
@@ -48,12 +50,16 @@ cb = cdao.getMember(id);
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 <script>
-
+var method;
+var merchant_uid='high_' + new Date().getTime();
+var price;
+var point;
+var message;
 //결제 제어
 function pay(){
 	if($("input:checkbox[id='policyChecked1']").is(":checked")){
 		if($("input:checkbox[id='policyChecked2']").is(":checked")){
-			var method = $(":input:radio[name=method]:checked").val();
+			method = $(":input:radio[name=method]:checked").val();
 			if(method == null) alert("결제수단을 결정해주세요");
 			else if(method == 'card') card();
 	 		else if(method == 'deposit') deposit();
@@ -67,12 +73,12 @@ function card(){
 	price = document.getElementById('price').innerText;
 	point = document.getElementById('myPoint').innerText;
 	message = document.getElementById('message').value;
-	
+
 	IMP.init('imp29540450');
 	IMP.request_pay({
 	    pg : 'danal_tpay', //아임포트 관리자에서 danal_tpay를 기본PG로 설정하신 경우는 생략 가능
 	    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
-	    merchant_uid : 'high_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+	    merchant_uid : merchant_uid, //상점에서 관리하시는 고유 주문번호를 전달
 	    name : '결제 진행중',
 	    amount : price,
 	    buyer_email : '<%=cb.getEmail()%>',
@@ -90,6 +96,7 @@ function card(){
 		   option1_str : '<%=option1_str%>',
 		   option2_str : '<%=option2_str%>',
 		   option3_str : '<%=option3_str%>',
+		   method : method,
 	   }
 	}, function(rsp) {
 	    if ( rsp.success ) {
@@ -109,6 +116,7 @@ function card(){
 	        		option1_str : rsp.custom_data.option1_str,
 	        		option2_str : rsp.custom_data.option2_str,
 	        		option3_str : rsp.custom_data.option3_str,
+	        		method : rsp.custom_data.method,
 	    		},
 	    		success : function(result, status){
 	    			console.log(result);
@@ -131,7 +139,10 @@ function card(){
 
 //무통장 입금
 function deposit(){
-	 window.open("Deposit.pa", "Deposit", "width=500,height=500");
+	price = document.getElementById('price').innerText;
+	point = document.getElementById('myPoint').innerText;
+	message = document.getElementById('message').value;
+	window.open("Deposit.pa?price="+price+"&merchant_uid="+merchant_uid+"&point="+point+"&message="+message+"&method="+method, "Deposit" , "width=500,height=500");
 }
 
 //포인트 변경
@@ -156,6 +167,15 @@ List<ProductBean> product_list = pdao.getProduct(product_str);
 int list_size = product_list.size(); 
 int price=0;
 %>
+<form action="" name="fr">
+<input type="hidden" name="amount_str" value=<%=amount_str %>>
+<input type="hidden" name="product_str" value=<%=product_str %>>
+<input type="hidden" name="vendorId_str" value=<%=vendorId_str %>>
+<input type="hidden" name="snsId_str" value=<%=snsId_str %>>
+<input type="hidden" name="option1_str" value=<%=option1_str %>>
+<input type="hidden" name="option2_str" value=<%=option2_str %>>
+<input type="hidden" name="option3_str" value=<%=option3_str %>>
+</form>
 <div class="container">
 	<div class="content">
 		<div id="title">

@@ -1,3 +1,5 @@
+<%@page import="web.client.db.ClientDAO"%>
+<%@page import="web.client.db.ClientBean"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,55 +11,39 @@
 	<meta name="keywords" content="Creative, Onepage, Parallax, HTML5, Bootstrap, Popular, custom, personal, portfolio" /> 
 	<meta name="author" content=""> 
 	<title>HIMU - OnePage HTML Parallax template</title> 
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/header.css" rel="stylesheet">
-	<link href="css/inner.css" rel="stylesheet">
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<link href="./css/header.css" rel="stylesheet">
+	<link href="./css/inner.css" rel="stylesheet">
+	<link href="./css/main.css" rel="stylesheet"> 
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- <header id="navigation"> 
-		<div class="navbar navbar-inverse navbar-fixed-top" role="banner"> 
-			<div class="container"> 
-				<div class="navbar-header"> 
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
-						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
-					</button> 
-					<a class="navbar-brand" href="index.html"><h1><img src="images/logo.png" alt="logo"></h1></a> 
-				</div> 
-				<div class="collapse navbar-collapse"> 
-					<ul class="nav navbar-nav navbar-right"> 
-						<li class="scroll active"><a href="#navigation">Home</a></li> 
-						<li class="scroll"><a href="test.jsp">List</a></li> 
-						<li class="scroll"><a href="#services">Services</a></li> 
-						<li class="scroll"><a href="#our-team">Our Team</a></li> 
-						<li class="scroll"><a href="#portfolio">Portfolio</a></li> 
-						<li class="scroll"><a href="#clients">Clients</a></li> 
-						<li class="scroll"><a href="#blog">Blog</a></li> 
-						<li class="scroll"><a href="#contact">Contact</a></li> 
-					</ul> 
-				</div> 
-			</div> 
-		</div>/navbar 
-	</header> /#navigation  -->
-	<jsp:include page="../inc/header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
+<%String id = "test";
+%>
   <!-- Page Content -->
   <div class="container">
     <div class="more_content">
     <!-- Page Content -->
-
         <div class="row">
-
+        
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
+                <p class="lead"><%=id %></p>
+                <jsp:include page="../inc/myinfo_left.jsp"/>
+               <%--  <div class="list-group">
+                	<div id="showbtn">
+                    	<a href="PayList.pa" class="list-group-item showbtn">내 정보</a>
+                    	<div id="show_content">
+                    		<a href="#"  class="list-group-item">내 정보 확인</a>
+                    		<a href="#"  class="list-group-item">내 정보 수정</a>
+                    		<a href="#"  class="list-group-item">회원 탈퇴</a>
+                    	</div>
+                    </div>
+                    <a href="PayList.pa" class="list-group-item">주문 내역</a>
+                    <a href="#" class="list-group-item">찜 목록</a>
+                </div> --%>
             </div>
-
             <div class="col-md-9">
-
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
@@ -83,16 +69,11 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
     <!-- /.container -->
-
     <div class="container">
-
         <hr>
-
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -101,15 +82,8 @@
                 </div>
             </div>
         </footer>
-
     </div>
   </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
