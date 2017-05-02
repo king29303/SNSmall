@@ -31,6 +31,13 @@ public class ClientFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./service/service.jsp");
 			forward.setRedirect(false);
+		}else if (command.equals("/mailAction.cl")) {
+			action = new mailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if (command.equals("/clientJoinAction.cl")) {
 			action = new clientJoinAction();
 			try {
