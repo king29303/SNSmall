@@ -59,130 +59,75 @@ List<SnsBean> list = (List<SnsBean>)request.getAttribute("list");
 
         <!-- Team Members Row -->
         <div class="row">
-          <div id="order"><ul id="order_option"><li style="font-weight: bold;color: darkblue;">정렬방법</li>
-          <li><a href="snsList.sn?category=<%=category %>&order=date">최신순</a></li>
-          <li><a href="snsList.sn?category=<%=category %>&order=sell">판매량순</a></li>
-          <li><a href="snsList.sn?category=<%=category %>&order=sns_profit">판매액순</a></li></ul></div>
-           <!--  <div class="col-lg-12">
-                <h2 class="page-header">SNS STAR LIST</h2>
-            </div> -->
-            <section id="our-team">
+			<div id="order"><ul id="order_option"><li style="font-weight: bold;color: darkblue;">정렬방법</li>
+          	<li><a href="snsList.sn?category=<%=category %>&order=date">최신순</a></li>
+          	<li><a href="snsList.sn?category=<%=category %>&order=sell">판매량순</a></li>
+          	<li><a href="snsList.sn?category=<%=category %>&order=sns_profit">판매액순</a></li></ul>
+          	</div>
             <% for(int i=0; i<list.size(); i++){
             	SnsBean sb = list.get(i);%>
-            <%-- <div class="col-lg-4 col-sm-6 text-center">
-            	<!-- http://placehold.it/200x200 -->
-                <img class="img-circle img-responsive img-center" src="./sns_pro_upload/<%=sb.getProfile_img() %>" alt="">
-                <h3><a href="SnsDetailAction.sn?sns_id=wndms4142"><%=sb.getName() %></a>
-                    <small><%=sb.getCategory() %></small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div> --%>
-            
             <div class="col-sm-6 col-md-3">
-								<div class="single-member">
-									<div id="profile_img_wrap">
-									<img src="./sns_pro_upload/<%=sb.getProfile_img() %>" alt="team member" />
-									</div>
-									<%-- <h4><a href="SnsDetailAction.sn?sns_id=wndms4142"><%=sb.getName() %></a></h4>
-									<h5><%=sb.getCategory() %></h5> --%>
-									<div id="star_list_detail">
-									<h3><a href="SnsDetailAction.sn?sns_id=<%=sb.getSns_id()%>"><%=sb.getName() %></a>
-                  					<small><%=sb.getCategory() %></small>
-               						</h3>
-									<p><%=sb.getContent() %></p>
-									</div>
-									<div class="socials">
-										<a href="#"><i class="fa fa-facebook"></i></a>
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-google-plus"></i></a>
-										<a href="#"><i class="fa fa-dribbble"></i></a>
-										<a href="#"><i class="fa fa-linkedin"></i></a>
-									</div>
-								</div>
-							</div>
-							
-            <%}%></section>
+				<div class="single-member">
+					<div id="profile_img_wrap">
+						<img src="./sns_pro_upload/<%=sb.getProfile_img() %>" alt="team member" />
+					</div>
+					<div id="star_list_detail">
+						<h3><a href="SnsDetailAction.sn?sns_id=<%=sb.getSns_id()%>"><%=sb.getName() %></a>
+						<small><%=sb.getCategory() %></small></h3>
+						<p><%=sb.getContent() %></p>
+					</div>
+					<div class="socials">
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+						<a href="#"><i class="fa fa-google-plus"></i></a>
+						<a href="#"><i class="fa fa-dribbble"></i></a>
+						<a href="#"><i class="fa fa-linkedin"></i></a>
+					</div>
+				</div>
+			</div>
+            <%}%>
             <div class="clear"></div>
-  <%--           <div id="paging"> <%
-			if(count!=0){
-				int pageCount = (Integer)request.getAttribute("pageCount");
-				int pageBlock = (Integer)request.getAttribute("pageBlock");
-				int startPage = (Integer)request.getAttribute("startPage");
-				int endPage = (Integer)request.getAttribute("endPage");
-				if(endPage > pageCount){endPage=pageCount;}
-				if(currentPage<=10){ %>
-					[이전]
-				<%}else{ %>
-					<a href="snsList.sn?category=<%=category %>&pageNum=<%=startPage-pageBlock %>">[이전]</a>&nbsp;
-				<%}
-				for(int i=startPage; i<=endPage; i++){
-					if(i==currentPage){%>
-						[<%=i %>]
-					<%}else{%>
-						<a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=i %>">[<%=i %>]</a>&nbsp;
-					<%}
-				}%>
-				<%if(endPage>=pageCount){ %>
-					[다음]
-				<%}else{ %>
-					<a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage+pageBlock %>">[다음]</a>&nbsp;
-				<%}
-			}//end if count%>
-			</div> --%>
-			       <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                 <%
-			if(count!=0){
-				int pageCount = (Integer)request.getAttribute("pageCount");
-				int pageBlock = (Integer)request.getAttribute("pageBlock");
-				int startPage = (Integer)request.getAttribute("startPage");
-				int endPage = (Integer)request.getAttribute("endPage");
-				if(endPage > pageCount){endPage=pageCount;}
-				if(currentPage<=10){ %>
-                    <li>
-                        <a>&laquo;</a>
-                    </li>
-                 <%}else{ %>
-                 	<li>
-                        <a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage-pageBlock %>">&laquo;</a>
-                    </li>
-                 <%}
-				for(int i=startPage; i<=endPage; i++){
-					if(i==currentPage){%>
-                    <li class="active">
-                        <a href="#"><%=i %></a>
-                    </li>
-                    <%}else{ %>
-                    <li>
-                        <a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=i %>"><%=i %></a>
-                    </li>
-                    <%}} %>
-                    <!-- <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li> -->
-                    <%if(endPage>=pageCount){ %>
-                    <li>
-                        <a>&raquo;</a>
-                    </li>
-                    <%}else{ %>
-                    <li>
-                        <a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage+pageBlock %>">&raquo;</a>
-                    </li>
-                    <%}} %>
-                </ul>
-            </div>
-        </div>
-        </div>
+			<div class="row text-center">
+				<div class="col-lg-12">
+                	<ul class="pagination">
+                 	<%if(count!=0){
+						int pageCount = (Integer)request.getAttribute("pageCount");
+						int pageBlock = (Integer)request.getAttribute("pageBlock");
+						int startPage = (Integer)request.getAttribute("startPage");
+						int endPage = (Integer)request.getAttribute("endPage");
+						if(endPage > pageCount){endPage=pageCount;}
+							if(currentPage<=10){ %>
+	                    		<li>
+	                    	  	  	<a>&laquo;</a>
+	                   			</li>
+	                 		<%}else{ %>
+	                 			<li>
+	                        		<a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage-pageBlock %>">&laquo;</a>
+	                  			</li>
+							<%}
+						for(int i=startPage; i<=endPage; i++){
+							if(i==currentPage){%>
+								<li class="active">
+									<a href="#"><%=i %></a>
+	                    		</li>
+	                   		 <%}else{ %>
+	                    		<li>
+									<a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=i %>"><%=i %></a>
+	                    		</li>
+	                    	<%}} %>
+	                    <%if(endPage>=pageCount){ %>
+	                    	<li>
+	                        	<a>&raquo;</a>
+	                    	</li>
+	                    <%}else{ %>
+	                    	<li>
+	                        	<a href="snsList.sn?order=<%=order %>&category=<%=category %>&pageNum=<%=startPage+pageBlock %>">&raquo;</a>
+	                    	</li>
+                    	<%}} %>
+                	</ul>
+            	</div>
+        	</div>
+		</div>
         <hr>
         <!-- Footer -->
         <footer>

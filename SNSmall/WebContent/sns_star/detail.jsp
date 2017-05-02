@@ -32,14 +32,12 @@
 
 //scroll menu
 window.onscroll = changePos;
- function changePos() {
-	 var skill_y = $('#skill').offset().top + $('#skill').height()-100;
-	 var nav_y = $('#navigation .navbar').height()+8;
-	 //alert(offset);
-	  var sell_popular_y = $('#sell_popular_box').offset().top + $('#sell_popular_box').height()-100;
-	 var sell_latest_y = $('#sell_latest_box').offset().top + $('#sell_latest_box').height()-100;
-	 /*var proInfo_y = $('#product_info').offset().top + $('#product_info').height()-100; */
-	 //alert(sell_popular_y);
+function changePos() {
+	var skill_y = $('#skill').offset().top + $('#skill').height()-100;
+	var nav_y = $('#navigation .navbar').height()+8;
+	var sell_popular_y = $('#sell_popular_box').offset().top + $('#sell_popular_box').height()-100;
+	var sell_latest_y = $('#sell_latest_box').offset().top + $('#sell_latest_box').height()-100;
+	/*var proInfo_y = $('#product_info').offset().top + $('#product_info').height()-100; */
     var tab = document.getElementById("tab");
     if (window.pageYOffset > 750) {
         tab.style.position = "absolute";
@@ -65,15 +63,13 @@ window.onscroll = changePos;
         }else{
         	$('#m_proInfo').removeClass('active');
         } */
-        
     } else {
         tab.style.position = "";
         tab.style.top = "";
-        
     }
 }
-//toggle
- $(document).ready(function(){
+
+$(document).ready(function(){
 	var width=10;
 	
 	$('.skillbar-bar').css('width','width+10+"%"');
@@ -81,10 +77,8 @@ window.onscroll = changePos;
         $("#writing").toggle();
     });
 	showSlides(0,5);
-	
-	
-	
 }); 
+
 //이미지 크게 띄우기
 function view(img){
 	var src = $(img).attr('src');
@@ -104,51 +98,21 @@ function plusSlides(n,length) {
 	showSlides(n, length);
 }
 function showSlides(n, full_length) {
-	//alert("full"+full_length);
 	slides = document.getElementsByClassName("mySlides");
 	if(full_length>=5){
-
-	
-		
-	if(n==0){
-		for (i = 0; i < 4; i++) {
-			//alert(i);
-			slides[i].style.display = "block";
-			if((4+i)<full_length) slides[4+i].style.display = "none";	
+		if(n==0){
+			for (i = 0; i < 4; i++) {
+				slides[i].style.display = "block";
+				if((4+i)<full_length) slides[4+i].style.display = "none";	
+			}
+		}
+		if(n==4){
+			for (i = 4; i < 8; i++) {
+				if(i<full_length) slides[i].style.display = "block";
+				slides[7-i].style.display = "none";
+			}
 		}
 	}
-	
-	if(n==4){
-		for (i = 4; i < 8; i++) {
-			//alert(i);
-			if(i<full_length) slides[i].style.display = "block";
-			slides[7-i].style.display = "none";
-		}
-	}
-
-	}
-	/* if(full_length<4){
-		for (i = 0; i < 4; i++) {
-			alert(i);
-			slides[i].style.display = "block";
-			slides[4+i].style.display = "none";		
-		}	  
-	}else{
-	
-	if(n==0) {length = 4;}
-	else if(n==4) length = 8;
-	for (i = n; i < length; i++) {
-		alert(i);
-		slides[i].style.display = "block";
-		if(i<4&&(4+i)<=full_length) {slides[4+i].style.display = "none";} 			
-			if(i>=4){
-				slides[7-i].style.display = "none";  
-				slides[0].style.display = "none";  
-			}		
-	}	
-	}//full_length else end */
-	
-	
 } 
 
 </script>
@@ -162,7 +126,6 @@ List<Integer> popular_list= (List<Integer>)request.getAttribute("popular_list");
 int popular_size = (popular_list.size()>4) ? 4:popular_list.size();
 ProductDAO pdao = new ProductDAO();
 ProductBean pb;
-//System.out.println(popular_list.size());
 %>
 <!-- Page Content -->
 <div class="container">

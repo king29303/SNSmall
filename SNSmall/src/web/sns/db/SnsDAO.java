@@ -82,17 +82,17 @@ public class SnsDAO {
 		try {
 			con = getConnection();
 			StringBuffer sql = new StringBuffer("select count(sns_id) from sns ");
-			if(category.equals("fashion")){
+			if (category.equals("fashion")) {
 				sql.append("where category = 'fashion'");
-			}else if(category.equals("beauty")){
+			} else if (category.equals("beauty")) {
 				sql.append("where category = 'beauty'");
-			}else if(category.equals("baby")){
+			} else if (category.equals("baby")) {
 				sql.append("where category = 'baby'");
-			}else if(category.equals("daily")){
+			} else if (category.equals("daily")) {
 				sql.append("where category = 'daily'");
-			}else if(category.equals("gym")){
+			} else if (category.equals("gym")) {
 				sql.append("where category = 'gym'");
-			}else if(category.equals("etc")){
+			} else if (category.equals("etc")) {
 				sql.append("where category = 'etc'");
 			}
 			pstmt = con.prepareStatement(sql.toString());
@@ -132,30 +132,30 @@ public class SnsDAO {
 		List<Object> list = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer("select * from sns ");
 		SnsBean sb = null;
-				try {
+		try {
 			con = getConnection();
-			if(category.equals("fashion")){
+			if (category.equals("fashion")) {
 				sql.append("where category = 'fashion'");
-			}else if(category.equals("beauty")){
+			} else if (category.equals("beauty")) {
 				sql.append("where category = 'beauty'");
-			}else if(category.equals("baby")){
+			} else if (category.equals("baby")) {
 				sql.append("where category = 'baby'");
-			}else if(category.equals("daily")){
+			} else if (category.equals("daily")) {
 				sql.append("where category = 'daily'");
-			}else if(category.equals("gym")){
+			} else if (category.equals("gym")) {
 				sql.append("where category = 'gym'");
-			}else if(category.equals("etc")){
+			} else if (category.equals("etc")) {
 				sql.append("where category = 'etc'");
 			}
-			
-			if(order.equals("sell")){
+
+			if (order.equals("sell")) {
 				sql.append(" order by sell desc");
-			}else if(order.equals("date")){
+			} else if (order.equals("date")) {
 				sql.append(" order by date desc");
-			}else if(order.equals("sns_profit")){
+			} else if (order.equals("sns_profit")) {
 				sql.append(" order by sell desc");
 			}
-			
+
 			sql.append(" limit ?,?;");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, start);
@@ -343,15 +343,13 @@ public class SnsDAO {
 		}
 		return check;
 	}
-	
+
 	// sns 스타가 판매한 물품
 	public List<Integer> snsProductList(String sns_id, String order) {
 		List<Integer> list = new ArrayList<Integer>();
-		//HashMap<Integer, Integer> map = new HashMap<>();
 		String sql2;
 
 		ResultSet rs2 = null;
-		//ResultSet rs3 = null;
 		try {
 			con = getConnection();
 			if (order.equals("date")) {
@@ -360,7 +358,6 @@ public class SnsDAO {
 				pstmt.setString(1, sns_id);
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
-					//System.out.println(rs.getInt(1));		
 					list.add(rs.getInt(1));
 				}
 			} else if (order.equals("sell")) {
@@ -368,14 +365,11 @@ public class SnsDAO {
 				pstmt = con.prepareStatement(sql2);
 				pstmt.setString(1, sns_id);
 				rs2 = pstmt.executeQuery();
-				while(rs2.next()){
-					//System.out.println(rs2.getInt("product_num")+", "+rs2.getInt("count(*)"));
+				while (rs2.next()) {
 					list.add(rs2.getInt("product_num"));
-					//map.put(rs2.getInt("product_num"), rs2.getInt("count(*)"));
 				}
 			}
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -391,12 +385,6 @@ public class SnsDAO {
 				} catch (Exception ex) {
 				}
 			}
-			/*if (rs3 != null) {
-				try {
-					rs3.close();
-				} catch (Exception ex) {
-				}
-			}*/
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -413,59 +401,5 @@ public class SnsDAO {
 		return list;
 
 	}
-/*		// sns 스타가 판매한 물품
-	public List<SnsBean> snsProductList(String sns_id, String order) {
-		List<SnsBean> list = new ArrayList<SnsBean>();
-		StringBuffer sql = new StringBuffer("select * from payment where sns_id=?");
-		SnsBean sb = null;
-		try {
-			con = getConnection();
-			if (order.equals("date")) {
-				sql.append(" order by date desc");
-			}
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, sns_id);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				sb = new SnsBean();
-				sb.setContent(rs.getString("content"));
-				sb.setDate(rs.getDate("date"));
-				sb.setDetail_img(rs.getString("detail_img"));
-				sb.setName(rs.getString("name"));
-				sb.setProfile_img(rs.getString("profile_img"));
-				sb.setSell(rs.getInt("sell"));
-				sb.setSns_id(rs.getString("sns_id"));
-				sb.setSns_profit(rs.getInt("sns_profit"));
-				sb.setCategory(rs.getString("category"));
-
-				list.add(sb);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-		return list;
-
-	}
-*/
-
 
 }
