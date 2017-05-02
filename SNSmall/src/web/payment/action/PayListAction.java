@@ -8,23 +8,20 @@ import javax.servlet.http.HttpServletResponse;
 import web.payment.db.PaymentBean;
 import web.payment.db.PaymentDAO;
 
-public class PayListAction implements Action{
+public class PayListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String client_id = "test";
 		String method = request.getParameter("method");
-		//System.out.println("check: "+method);
 		PaymentDAO pdao = new PaymentDAO();
 		int page = Integer.parseInt(request.getParameter("page"));
-		//System.out.println("page: "+page);
 		List<PaymentBean> pay_list = pdao.getPaymentById(page, client_id, method);
 		request.setAttribute("pay_list", pay_list);
 		ActionForward forward = new ActionForward();
-		//forward.setPath("./mypage/mypay_list.jsp");
 		forward.setPath("./mypage/payInnerList.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}
-	
+
 }

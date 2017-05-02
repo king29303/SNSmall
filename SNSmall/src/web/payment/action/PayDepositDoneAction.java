@@ -13,12 +13,12 @@ import web.payment.db.PaymentDAO;
 import web.product.db.ProductBean;
 import web.product.db.ProductDAO;
 
-public class PayDepositDoneAction implements Action{
+public class PayDepositDoneAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8"); 
+		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		String id = "test";
 		String merchant_uid = request.getParameter("merchant_uid");
@@ -40,10 +40,11 @@ public class PayDepositDoneAction implements Action{
 		String option3_str = request.getParameter("option3_str");
 		String[] option3 = option3_str.split(",");
 		String method = request.getParameter("method");
-		String state="";
-		if(method.equals("card")) state="payDone";
-		else if(method.equals("deposit")) state="waiting";
-		// Payment�뿉 Insert
+		String state = "";
+		if (method.equals("card"))
+			state = "payDone";
+		else if (method.equals("deposit"))
+			state = "waiting";
 		PaymentBean pb = null;
 		ProductBean prob = null;
 		PaymentDAO pdao = new PaymentDAO();
@@ -51,7 +52,7 @@ public class PayDepositDoneAction implements Action{
 		int usedPoint = pdao.usingPoint(point, id);
 		List<PaymentBean> list_pb = new ArrayList<>();
 		for (int i = 0; i < amount.length; i++) {
-			prob = prodao.getProduct((Integer.parseInt(product[i])));// 臾쇨굔 踰덊샇
+			prob = prodao.getProduct((Integer.parseInt(product[i])));
 			pb = new PaymentBean();
 			pb.setAmount(Integer.parseInt(amount[i]));
 			pb.setClient_id(id);
@@ -64,19 +65,15 @@ public class PayDepositDoneAction implements Action{
 			pb.setOption2(option2[i]);
 			pb.setOption3(option3[i]);
 			list_pb.add(pb);
-			// �룷�씤�듃 蹂�寃�
 			pdao.subPoint(point, id);
 		}
 		out.println("<script>");
 		out.println("alert('주문이 완료되었습니다.');");
-		out.println("window.opener.location.href='PayDone.pa?merchant_uid="+merchant_uid+"';");
+		out.println("window.opener.location.href='PayDone.pa?merchant_uid=" + merchant_uid + "';");
 		out.println("window.close();");
 		out.println("</script>");
 		pdao.insertPay(list_pb, usedPoint, state);
-					//ActionForward forward = new ActionForward();
-					//forward.setPath("./pay/payDone.jsp");
-					//forward.setRedirect(false);
-		return null;//forward;
+		return null;
 	}
-	
+
 }

@@ -11,7 +11,7 @@ public class CancleListAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String vendor_id="vendor";
+		String vendor_id="vendor_id";
 		VendorDAO vdao = new VendorDAO();
 		int count = vdao.getCancleListCount(vendor_id);
 		String pageNum = request.getParameter("pageNum");
