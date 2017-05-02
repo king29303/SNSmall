@@ -3,7 +3,14 @@ package web.client.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -85,7 +92,7 @@ Connection con = null;
 				}
 			}
 		}
-	} //insertVendor
+	} //insertClient
 	
 	public boolean  idDupCheck(String id) { // 중복 아이디 체크
 		boolean check = false; // 아이디 중복
@@ -195,7 +202,42 @@ Connection con = null;
 		return mtb;
 	}// idCheck() end
 	
-	
+	// 메일 보내기
+	public boolean sendMail(String email, String content) throws com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException {
+
+		boolean check = false;
+		final String id = "sunju635";
+		final String pass = "Tjswn635*";
+		int port = 25;
+		String host = "smtp.naver.com";
+		String from = "sunju635@naver.com";
+		try {
+			Properties props = new Properties();
+			props.put("mail.stmp.starttls.enable", "true");
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.port", port);
+
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(id, pass);
+				}
+			});
+			session.setDebug(true);
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+			message.setSubject("인증메일입니다");
+			message.setContent(content, "text/html; charset=EUC-KR");
+			message.setText(content);
+
+			Transport.send(message);
+			check = true;
+		} catch (Exception e) {
+			check = false;
+		}
+		return check;
+	}
 	
 	
 }
