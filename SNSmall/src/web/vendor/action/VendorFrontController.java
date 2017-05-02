@@ -47,7 +47,36 @@ public class VendorFrontController extends HttpServlet{
 			forward.setPath("./member/vendor/vendorJoinForm2.jsp");
 			forward.setRedirect(false);
 		}
-		
+		/*정선주 수정 사항 시작*/
+		else if(command.equals("/CancleList.ve")){
+			action = new CancleListAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/PayCancle.ve")){
+			action = new PayCancleAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/MultipleCancleDone.ve")){
+			action = new MultipleCancleAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/multipleCancle.ve")){
+			forward = new ActionForward();
+			forward.setPath("./mypage/vendor/multiple_cancle_list.jsp");
+			forward.setRedirect(false);
+		}
+		/*정선주 수정 사항 끝*/
 		// �씠�룞
 		if(forward != null){
 			if(forward.isRedirect()){
