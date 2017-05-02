@@ -34,6 +34,7 @@ function myfunction(){
 
 }
 
+
 </script>
 </head>
 <body>
@@ -54,7 +55,7 @@ function myfunction(){
 <%
 List<CartBean> cblist = new ArrayList<CartBean>();
 %>
-<form action="Pay.pa" method="post">
+<form action="Pay.pa" method="post" name="form1">
 
 <%
 int sum=0;
@@ -74,12 +75,13 @@ for(int i=0;i<cl.size();i++){
 	CartBean cb = (CartBean)cl.get(i);
 
 	int price=cb.getPrice();
-
 	
 %>
 
 <input type="checkbox" name="check" value="<%=cb.getPrice()%>" onchange="myfunction()" checked>
 
+<!-- 장바구니 정보 -->
+<a href="Detail2.pr">
 물품 번호:<%=cb.getProduct_num() %>
 이미지:<%=cb.getMain_img() %>
 품명:<%=cb.getSubject()%>
@@ -97,20 +99,30 @@ for(int i=0;i<cl.size();i++){
 가격:<%=cb.getPrice() %>
 판매자 아이디 :<%=cb.getVendor_id() %>
 구매자 아이디 :<%=cb.getClient_id()%>
+</a>
+<a href="./Cart_Delete.ca?product_num=<%=cb.getProduct_num()%>"><input type="button" name="delete" value="삭제"></a>
 <br>
+<!-- 정보 끝 -->
 
 <%client_id += cb.getClient_id()+","; 
 product_num += cb.getProduct_num()+","; 
 amount += cb.getAmount()+","; 
-vendor_id += cb.getVendor_id()+","; 
-sns_id += cb.getSns_id()+","; 
+vendor_id += cb.getVendor_id().toString()+","; 
+if(cb.getSns_id()==null){
+	sns_id=" ,";
+}else{
+	sns_id += cb.getSns_id()+","; 
+}
 option1	+= cb.getOption1()+","; 
 option2 += cb.getOption2()+","; 
 option3 += cb.getOption3()+","; 
+
 %>
 
  <br>
-<%sum = sum+price;} %>
+<%sum = sum+price;} 
+System.out.print(sns_id);
+%>
 
 <br>
 총가격 :<span id="price"><%=sum %></span>

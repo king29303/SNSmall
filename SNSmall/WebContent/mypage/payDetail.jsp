@@ -27,12 +27,11 @@ ProductBean prob = (ProductBean)request.getAttribute("prob");
 ClientDAO cdao = new ClientDAO();
 ClientBean cb = cdao.getMember(id);
 %>
-  <!-- Page Content -->
-  <div class="container">
-    <div class="more_content">
-    <!-- Page Content -->
-        <div class="row">
-        
+<!-- Page Content -->
+<div class="container">
+	<div class="more_content">
+   	 <!-- Page Content -->
+		<div class="row">
             <div class="col-md-3">
                 <p class="lead"><%=id %></p>
                 <jsp:include page="../inc/myinfo_left.jsp"/>

@@ -1,5 +1,6 @@
 package web.payment.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class PayDepositDoneAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8"); 
+		PrintWriter out = response.getWriter();
 		String id = "test";
 		String merchant_uid = request.getParameter("merchant_uid");
 		String vendorId_str = request.getParameter("vendorId_str");
@@ -65,10 +69,11 @@ public class PayDepositDoneAction implements Action{
 			pdao.subPoint(point, id);
 		}
 		pdao.insertPay(list_pb, check_usedPoint, state);
-					ActionForward forward = new ActionForward();
-					forward.setPath("./pay/payDone.jsp");
-					forward.setRedirect(false);
-		return forward;
+		out.println("<script>");
+		out.println("alert('주문이 완료되었습니다.');");
+		out.println("location.href='CancleList.ve';");
+		out.println("</script>");
+		return null;
 	}
 	
 }

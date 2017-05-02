@@ -44,9 +44,9 @@ int end = (Integer)request.getAttribute("end");
 List<PaymentBean> cancle_list = (List<PaymentBean>)request.getAttribute("list");
 ProductDAO prodao = new ProductDAO();
 %>
-  <!-- Page Content -->
-  <div class="container">
-    <div class="more_content">
+<!-- Page Content -->
+<div class="container">
+	<div class="more_content">
     <!-- Page Content -->
         <div class="row">
             <div class="col-md-3">
@@ -76,20 +76,21 @@ ProductDAO prodao = new ProductDAO();
                   </table>
                   <%} %>
             </div>
-    </div>
+    	</div>
     <!-- /.container -->
-    <div class="container">
-        <hr>
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-  </div>
+		<div class="container">
+        	<hr>
+	        <!-- Footer -->
+	        <footer>
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <p>Copyright &copy; Your Website 2014</p>
+	                </div>
+	            </div>
+	        </footer>
+    	</div>
+	</div>
+</div>
     <!-- /.container -->
 </body>
 </html>

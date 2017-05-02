@@ -16,7 +16,7 @@ public class CartListAction implements Action{
 		System.out.println("�옣諛붽뎄�땲 由ъ뒪�듃 蹂댁뿬二쇨린");
 		
 		CartDAO cdao = new CartDAO();
-		String client_id = "test";
+		String client_id = "abc";
 		
 		List<CartBean> CartList = cdao.getCartList(client_id);
 		request.setAttribute("CartList", CartList);
