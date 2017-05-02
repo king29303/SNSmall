@@ -40,37 +40,35 @@ int length = pb_list.size();
 int price = 0;
 %>
 <jsp:include page="../../inc/header.jsp"/>
-  <!-- Page Content -->
-  <div class="container">
-    <div class="more_content">
-
-<div id = "pay_check">
-<div><h2>결제 정보 확인</h2></div>
-<table border="1" style="width: 900px; margin: auto;">
-<tr><td rowspan="<%=length+1 %>" style="width: 150px;">주문번호<br><%=merchant_uid%></td><td>상품정보</td><td>가격</td></tr>
-<%
-for(int i=0; i<length; i++){
-PaymentBean pb = pb_list.get(i);
-int product_num = pb.getProduct_num();
-ProductDAO prodao = new ProductDAO();
-ProductBean prob = prodao.getProduct(product_num);
-price += prob.getPrice();
-%>
- <tr><td><%=prob.getSubject() %></td><td><%=prob.getPrice() %></td></tr>
- <%} %>
- <tr><td colspan="3" style="text-align: right;">사용한 포인트: <%=pb_list.get(0).getUsedPoint() %></td></tr>
- <tr><td colspan="3" style="text-align: right;">총 결제 금액: <%=price-pb_list.get(0).getUsedPoint() %></td></tr>
-</table>
-</div>
-</div>
-<div id="pay_bottom">
-<input type="button" value="주문 취소" onclick="location.href='MultipleCancleDone.ve?order_num=<%=merchant_uid%>'">
-<input type="button" value="취소" onclick="history.back();">
-
-
+<!-- Page Content -->
+<div class="container">
+	<div class="more_content">
+		<div id = "pay_check">
+			<div><h2>결제 정보 확인</h2></div>
+			<table border="1" style="width: 900px; margin: auto;">
+				<tr><td rowspan="<%=length+1 %>" style="width: 150px;">주문번호<br><%=merchant_uid%></td><td>상품정보</td><td>가격</td></tr>
+				<%
+				for(int i=0; i<length; i++){
+				PaymentBean pb = pb_list.get(i);
+				int product_num = pb.getProduct_num();
+				ProductDAO prodao = new ProductDAO();
+				ProductBean prob = prodao.getProduct(product_num);
+				price += prob.getPrice();
+				%>
+ 				<tr><td><%=prob.getSubject() %></td><td><%=prob.getPrice() %></td></tr>
+ 				<%} %>
+ 				<tr><td colspan="3" style="text-align: right;">사용한 포인트: <%=pb_list.get(0).getUsedPoint() %></td></tr>
+ 				<tr><td colspan="3" style="text-align: right;">총 결제 금액: <%=price-pb_list.get(0).getUsedPoint() %></td></tr>
+			</table>
+		</div>
+	
+	<div id="pay_bottom">
+		<input type="button" value="주문 취소" onclick="location.href='MultipleCancleDone.ve?order_num=<%=merchant_uid%>'">
+		<input type="button" value="취소" onclick="history.back();">
 	</div>
-	        <hr>
-
+	<hr>
+	</div>
+	<div id="containter">
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -80,8 +78,9 @@ price += prob.getPrice();
             </div>
             <!-- /.row -->
         </footer>
+    </div>
+</div>
          <!-- /.container -->
 
- </div>
 </body>
 </html>
