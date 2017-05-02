@@ -51,7 +51,7 @@ PaymentBean pb = pb_list.get(i);
 int product_num = pb.getProduct_num();
 ProductDAO prodao = new ProductDAO();
 ProductBean prob = prodao.getProduct(product_num);
-price += prob.getPrice();
+price += prob.getPrice()*pb.getAmount();
 %>
  <tr><td><%=prob.getSubject() %></td><td><%=prob.getPrice() %></td></tr>
  <%} %>

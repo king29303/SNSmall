@@ -40,7 +40,7 @@ String vendorId_str = request.getParameter("vendor_id");
 String option1_str = request.getParameter("option1");
 String option2_str = request.getParameter("option2");
 String option3_str = request.getParameter("option3");
-String snsId_str = "wndms4142,wndms5555";
+String snsId_str = request.getParameter("sns_id");
 //request.setAttribute("id", id);
 ClientBean cb = new ClientBean();
 ClientDAO cdao = new ClientDAO();

@@ -49,7 +49,6 @@ public class PayDepositDoneAction implements Action{
 		PaymentDAO pdao = new PaymentDAO();
 		ProductDAO prodao = new ProductDAO();
 		int usedPoint = pdao.usingPoint(point, id);
-		int check_usedPoint = (usedPoint>0) ? 1:0;
 		List<PaymentBean> list_pb = new ArrayList<>();
 		for (int i = 0; i < amount.length; i++) {
 			prob = prodao.getProduct((Integer.parseInt(product[i])));// 臾쇨굔 踰덊샇
@@ -68,12 +67,16 @@ public class PayDepositDoneAction implements Action{
 			// �룷�씤�듃 蹂�寃�
 			pdao.subPoint(point, id);
 		}
-		pdao.insertPay(list_pb, check_usedPoint, state);
 		out.println("<script>");
 		out.println("alert('주문이 완료되었습니다.');");
-		out.println("location.href='CancleList.ve';");
+		out.println("window.opener.location.href='PayDone.pa?merchant_uid="+merchant_uid+"';");
+		out.println("window.close();");
 		out.println("</script>");
-		return null;
+		pdao.insertPay(list_pb, usedPoint, state);
+					//ActionForward forward = new ActionForward();
+					//forward.setPath("./pay/payDone.jsp");
+					//forward.setRedirect(false);
+		return null;//forward;
 	}
 	
 }
