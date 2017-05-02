@@ -1,3 +1,4 @@
+<%@page import="web.vendor.db.VendorDAO"%>
 <%@page import="web.product.db.ProductBean"%>
 <%@page import="web.product.db.ProductDAO"%>
 <%@page import="java.util.List"%>
@@ -30,13 +31,15 @@
 </head>
 <body>
 <%
+String vendor_id="vendor";
 String merchant_uid = request.getParameter("merchant_uid");
 PaymentDAO pdao = new PaymentDAO();
-List<PaymentBean> pb_list = pdao.getPayment(merchant_uid);
+VendorDAO vdao = new VendorDAO();
+List<PaymentBean> pb_list = vdao.payDeleteList(vendor_id, merchant_uid);
 int length = pb_list.size();
 int price = 0;
 %>
-<jsp:include page="../inc/header.jsp"/>
+<jsp:include page="../../inc/header.jsp"/>
   <!-- Page Content -->
   <div class="container">
     <div class="more_content">
@@ -61,9 +64,8 @@ price += prob.getPrice();
 </div>
 </div>
 <div id="pay_bottom">
-<input type="button" value="구매목록">
-<input type="button" value="주문 취소" onclick="location.href='PayMultipleCancle.pa?order_num=<%=merchant_uid%>'">
-<input type="button" value="확인">
+<input type="button" value="주문 취소" onclick="location.href='MultipleCancleDone.ve?order_num=<%=merchant_uid%>'">
+<input type="button" value="취소" onclick="history.back();">
 
 
 	</div>

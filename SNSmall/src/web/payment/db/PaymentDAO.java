@@ -86,6 +86,18 @@ Connection con = null;
 		if(pstmt != null){try {pstmt.close();}catch(Exception ex){}}
 		if(con != null){try {con.close();}catch(Exception ex) {}}}	
 	}
+	public void deletePay(String order_num){
+		try{
+			con = getConnection();
+			sql = "delete from payment where order_num=? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, order_num);
+			pstmt.executeUpdate();			
+		} catch (Exception e) {e.printStackTrace();}
+		finally {if(rs != null){try {rs.close();} catch (Exception ex) {}}
+		if(pstmt != null){try {pstmt.close();}catch(Exception ex){}}
+		if(con != null){try {con.close();}catch(Exception ex) {}}}	
+	}
 	public void deletePayRequest(String order_num){
 		try{
 			con = getConnection();
@@ -127,6 +139,8 @@ Connection con = null;
 	}
 	public void addPoint(int point, String id){
 		try{
+			System.out.println("addPoint: "+point);
+			System.out.println("addPointId: "+id);
 			con = getConnection();
 			sql = "update client set point=point+? where client_id=? ";
 			pstmt = con.prepareStatement(sql);
@@ -234,7 +248,7 @@ Connection con = null;
 			PaymentBean pb = null;
 			try{
 				con = getConnection();
-				sql = "update product set amount=amount+?, count=count-1 where product_num=? ";
+				sql = "update product set amount=amount-?, count=count-1 where product_num=? ";
 				pstmt = con.prepareStatement(sql);
 					pstmt.setInt(1, amount);
 					pstmt.setInt(2, product_num);
@@ -310,6 +324,7 @@ Connection con = null;
 					pb.setState(rs.getString("state"));
 					pb.setNum(rs.getInt("num"));
 					pb.setUsedPoint(rs.getInt("usedPoint"));
+					pb.setClient_id(rs.getString("client_id"));
 
 				}
 				

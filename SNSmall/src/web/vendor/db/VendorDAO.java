@@ -4,10 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import web.payment.db.PaymentBean;
+import web.sns.db.SnsBean;
 
 public class VendorDAO {
 
@@ -149,5 +154,156 @@ ResultSet rs = null;
 		// 4단계 실행
 		return vb;
 	}// getMember() end
+	
+	
+	/*정선주 수정 시작*/
+	// vendor 취소 목록 카운트
+	public int getCancleListCount(String vendor_id) {
+		int num = 0;
+		try {
+			con = getConnection();
+			sql = "select count(*) from payment where vendor_id = ? and state = 'cancle' ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vendor_id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				num = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+
+		return num;
+	}
+	
+	// 취소 목록 가져오기
+	public List<PaymentBean> payDeleteList(int start, int pageSize, String vendor_id) {
+		List<PaymentBean> list = new ArrayList<PaymentBean>();
+		PaymentBean pb = null;
+				try {
+					sql = "select * from payment where vendor_id = ? and state = 'cancle' group by order_num limit ?,?";
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vendor_id);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, pageSize);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				pb = new PaymentBean();
+				pb.setAmount(rs.getInt("amount"));
+				pb.setClient_id(rs.getString("client_id"));
+				pb.setDate(rs.getDate("date"));
+				pb.setMessage(rs.getString("message"));
+				pb.setNum(rs.getInt("num"));
+				pb.setOption1(rs.getString("option1"));
+				pb.setOption2(rs.getString("option2"));
+				pb.setOption3(rs.getString("option3"));
+				pb.setOrder_num(rs.getString("order_num"));
+				pb.setProduct_num(rs.getInt("product_num"));
+				pb.setSns_id(rs.getString("sns_id"));
+				pb.setState(rs.getString("state"));
+				pb.setUsedPoint(rs.getInt("usedPoint"));
+				list.add(pb);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+		return list;
+
+	}
+	// 취소 목록 가져오기
+	public List<PaymentBean> payDeleteList(String vendor_id, String order_num) {
+		List<PaymentBean> list = new ArrayList<PaymentBean>();
+		PaymentBean pb = null;
+		try {
+			sql = "select * from payment where vendor_id = ? and order_num = ?";
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vendor_id);
+			pstmt.setString(2, order_num);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				pb = new PaymentBean();
+				pb.setAmount(rs.getInt("amount"));
+				pb.setClient_id(rs.getString("client_id"));
+				pb.setDate(rs.getDate("date"));
+				pb.setMessage(rs.getString("message"));
+				pb.setNum(rs.getInt("num"));
+				pb.setOption1(rs.getString("option1"));
+				pb.setOption2(rs.getString("option2"));
+				pb.setOption3(rs.getString("option3"));
+				pb.setOrder_num(rs.getString("order_num"));
+				pb.setProduct_num(rs.getInt("product_num"));
+				pb.setSns_id(rs.getString("sns_id"));
+				pb.setState(rs.getString("state"));
+				pb.setUsedPoint(rs.getInt("usedPoint"));
+				list.add(pb);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+		return list;
+		
+	}
+
+	/*정선주 수정 끝*/
 	
 }

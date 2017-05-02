@@ -1,4 +1,4 @@
-package web.payment.action;
+package web.vendor.action;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -11,7 +11,7 @@ import web.payment.db.PaymentDAO;
 import web.product.db.ProductBean;
 import web.product.db.ProductDAO;
 
-public class PayMultipleCancleAction implements Action {
+public class MultipleCancleAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,23 +20,24 @@ public class PayMultipleCancleAction implements Action {
 		PrintWriter out = response.getWriter();
 		PaymentDAO pdao = new PaymentDAO();
 		ProductDAO prodao = new ProductDAO();
-		String id="test";
+
 		String order_num = request.getParameter("order_num");
 		List<PaymentBean> pb_list = pdao.getPayment(order_num);
 		int usedPoint = pb_list.get(0).getUsedPoint();
+		String id=pb_list.get(0).getClient_id();
 		ProductBean prob = null;
 		for(int i=0; i<pb_list.size(); i++){
 			PaymentBean pb = pb_list.get(i);
 			prob = prodao.getProduct(pb.getProduct_num());
-			//pdao.subSnsPay(prob.getPrice(), pb.getSns_id());
-			//pdao.subVendorProfit(prob.getPrice(), pb.getVendor_id());
-			//pdao.subAmount(pb.getAmount(), pb.getProduct_num());
+			pdao.subSnsPay(prob.getPrice(), pb.getSns_id());
+			pdao.subVendorProfit(prob.getPrice(), pb.getVendor_id());
+			pdao.subAmount(pb.getAmount(), pb.getProduct_num());
 		}
-				pdao.deletePayRequest(order_num);
-				//pdao.addPoint(usedPoint, id);
+				pdao.deletePay(order_num);
+				pdao.addPoint(usedPoint, id);
 				out.println("<script>");
 				out.println("alert('취소가 완료되었습니다.');");
-				out.println("location.href='PayList.pa';");
+				out.println("location.href='CancleList.ve';");
 				out.println("</script>");
 
 		return null;
